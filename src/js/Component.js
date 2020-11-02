@@ -5,23 +5,33 @@ class Component extends THREE.Object3D {
     }
     addCuboid(obj, x, y, z, w, h, d, colour) {
         let geometry = new THREE.BoxGeometry(d, h, w);
-       // let basic = new THREE.Mesh(geometry, material);
-        let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
-        //this.material = material;
-       // this.material.wireframe = true;
-        let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
-        color: colour }));
-        let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
+
+       /// let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
+        
+      /*ew THREE.MeshPhongMaterial 
+            (
+                {color: "rgb(55, 52, 67)" }
+            ));*/
+      let material = new THREE.MeshPhongMaterial();
+      material.color.setHex( 0xffffff );
+      let phongMat = new THREE.Mesh(geometry, material);
+        
+        console.log("color e:");
+        console.log(colour);
+       /* let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
             color: colour
           }));
 
-        basicMat.position.set(x,y,z);
-        phongMat.position.set(x,y,z);
-        lambertMat.position.set(x,y,z);
+        basicMat.position.set(x,y,z);*/
+        //phongMat.position.set(x,y,z);
+        phongMat.position.x = x;
+        phongMat.position.y = y;
+        phongMat.position.z = z;
+       // lambertMat.position.set(x,y,z);
         
         obj.phongMesh.push(phongMat);
-        obj.lambertMesh.push(lambertMat);
-        obj.basicMesh.push(basicMat);
+     /*   obj.lambertMesh.push(lambertMat);
+        obj.basicMesh.push(basicMat);*/
         obj.add(phongMat); // qual querem que seja o material de default? 
 
 
@@ -54,29 +64,36 @@ class Component extends THREE.Object3D {
     addCylinderVertical(obj, x, y, z, base, height,colour) { //problema com a cor 
         let geometry = new THREE.CylinderGeometry(base / 2, base / 2, height, 16, 1);
     
-        let basicMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
+       /* let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
             color: colour
-          }));
-        let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
-            color: colour
-        }));
-        let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
-            color: colour
-          }));
+          }));*/
 
-        basicMat.position.set(x,y,z);
+        let material = new THREE.MeshPhongMaterial({color:'red' , side: THREE.DoubleSide });
+        material.color.setHex( 0xffffff );
+        console.log("corzinha");
+        console.log(material.color);
+
+        let phongMat = new THREE.Mesh(geometry, material);
+        console.log(phongMat.material.color);
+
+       /* let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
+            color: colour
+          }));
+*/
+       // basicMat.position.set(x,y,z);
         phongMat.position.set(x,y,z);
-        lambertMat.position.set(x,y,z);
+       /* lambertMat.position.set(x,y,z);
 
-        basicMat.rotateX(Math.PI / 2);
+        basicMat.rotateX(Math.PI / 2);*/
         phongMat.rotateX(Math.PI / 2);
-        lambertMat.rotateX(Math.PI / 2);
+       // lambertMat.rotateX(Math.PI / 2);
         
         
         obj.phongMesh.push(phongMat);
-        obj.lambertMesh.push(lambertMat);
-        obj.basicMesh.push(basicMat);
+      /*  obj.lambertMesh.push(lambertMat);
+        obj.basicMesh.push(basicMat);*/
         obj.add(phongMat); 
+
     }
 
     addSphere(obj, x, y,z, radius,colour)

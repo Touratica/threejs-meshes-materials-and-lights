@@ -55,8 +55,14 @@ function createScene() {
 	scene.add(new THREE.AxesHelper(30));
 	floor = new Floor(0,0,0);
 	platform = new Platform(0,0,0);
-	//poolTable = createTable();
-	//scene.add(poolTable);
+	if(floor.currentMesh == floor.phongMesh)
+	{
+		console.log("sou mesh\n");
+	}
+	console.log("cor real?");
+	console.log(platform.getColor());
+	
+	
 
 }
 
