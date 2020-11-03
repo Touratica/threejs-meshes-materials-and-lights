@@ -4,7 +4,7 @@
 
  	constructor(x, y, z) {
                 super(x, y, z);
-                this.currentMesh = this.phongMesh;
+                this.currentMesh = this.basicMesh;
             
 	 }
 

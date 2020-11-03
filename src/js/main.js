@@ -54,13 +54,10 @@ function createScene() {
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
 	scene.add(new THREE.AxesHelper(30));
 	floor = new Floor(0,0,0);
+	console.log("floor\n");
 	platform = new Platform(0,0,0);
-	if(floor.currentMesh == floor.phongMesh)
-	{
-		console.log("sou mesh\n");
-	}
-	console.log("cor real?");
-	console.log(platform.getColor());
+	console.log("platform");
+	
 	
 	
 
