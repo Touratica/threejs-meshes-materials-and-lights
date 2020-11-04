@@ -61,7 +61,7 @@ function createScene() {
 	//console.log("platform");
 
 	scene.add(platform);
-	
+	scene.add(floor);
 
 }
 
