@@ -5,6 +5,7 @@ let clock = new THREE.Clock();
 let cameraRatio = 20;
 
 let car;
+let radium = 2; //raio da roda
 let platform; // objeto palanque inclui o carro consigo. 
 let floor;
 
@@ -54,14 +55,16 @@ function createScene() {
 	scene.add(new THREE.AxesHelper(30));
 	floor = new Floor(0,0,0);
 	//console.log("floor\n");
-	car = new Car(100, -10, -125);
+	//car = new Car(100, -10, -125,radium);
+	car=new Car(0,0,0); //mudar
+	//car.addCar(100,-10,-125,radium)
 	platform = new Platform(0,0,0);
-
 	platform.addCar(car);
 	//console.log("platform");
 
 	scene.add(platform);
 	scene.add(floor);
+	scene.add(car);
 
 }
 
