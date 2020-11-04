@@ -4,32 +4,63 @@ class Car extends Component{
         super(x,y,z);
     }
     
-	addCar(obj, x, y, z, color, radium) {
-		let L_lateral = radium * 16; //Largura lateral
+	addCar(obj, x, y, z, color, radius) {
+		let L_lateral = radius * 11; //Largura lateral
 		let segment = L_lateral / 28;
-        let L_frontal = 17;
-        windowColor = new THREE.Color("rgba(0, 0, 0, 0.8)");
-		bodyworkColor = new THREE.Color("silver");
+        let L_frontal = 17 * segment;
+        let windowColor = new THREE.Color("rgba(0, 0, 0, 0.8)");
+		let bodyworkColor = new THREE.Color("silver");
         
 		let geometry = new THREE.Geometry();
 
 		// chassis
 		// chassis body
-		let chassis = new THREE.Object3D();
-		let mainBody = new THREE.BoxGeometry(L_frontal, segment * 2, L_lateral);
+		let mainBody = new THREE.BoxGeometry(L_lateral, L_frontal + 2 * segment, 2 * segment);
+		mainBody.applyMatrix4(new THREE.Matrix4().makeTranslation(-L_lateral / 2 + 3 * segment, -L_frontal / 2, 0));
 
 		// front bumper
 		let shape = new THREE.Shape();
-		shape.moveTo(-1, -1);
-		shape.lineTo(-1, 1);
-		shape.lineTo(1, -1);
-		
-		let frontBumper = new THREE.ExtrudeGeometry(shape, {steps: 1,
-			depth: L_frontal + 2, bevelEnabled: false});
-		frontBumper.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0,
-			-(L_frontal + 2) / 2));
-		frontBumper.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2));
-		
+		shape.moveTo(-segment, -segment);
+		shape.lineTo(-segment, segment);
+		shape.lineTo(segment, -segment);
+
+		let frontBumper = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: L_frontal + 2 * segment,
+			bevelEnabled: false});
+		frontBumper.applyMatrix4(new THREE.Matrix4().makeTranslation(4 * segment, 0, -L_frontal - segment));
+		frontBumper.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0),
+			-Math.PI / 2));
+
+		// back bumper
+		shape = new THREE.Shape();
+		shape.moveTo(-1.5 * segment, -1.25 * segment);
+		shape.lineTo(1.5 * segment, segment);
+		shape.lineTo(1.5 * segment, -segment);
+
+		let backBumper = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: L_frontal + 2 * segment, bevelEnabled: false});
+		backBumper.applyMatrix4(new THREE.Matrix4().makeTranslation(-L_lateral + 1.5 * segment, 0, -L_frontal - segment));
+		backBumper.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0),
+			-Math.PI / 2));
+
+		// Wheels
+		let wheelFL = new THREE.CylinderGeometry(radius, radius, 2 * segment, 16);
+		wheelFL.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0),
+			-Math.PI / 2));
+
+		let wheelFR = new THREE.CylinderGeometry(radius, radius, 2 * segment, 16);
+		wheelFR.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0),
+			Math.PI / 2));
+		wheelFR.applyMatrix4(new THREE.Matrix4().makeTranslation(0, -L_frontal, 0));
+
+		let wheelBR = new THREE.CylinderGeometry(radius, radius, 2 * segment, 16);
+		wheelBR.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0),
+			Math.PI / 2));
+		wheelBR.applyMatrix4(new THREE.Matrix4().makeTranslation(-L_lateral + 6 * segment, -L_frontal, 0));
+
+		let wheelBL = new THREE.CylinderGeometry(radius, radius, 2 * segment, 16);
+		wheelBL.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0),
+			Math.PI / 2));
+		wheelBL.applyMatrix4(new THREE.Matrix4().makeTranslation(-L_lateral + 6 * segment, 0, 0));
+
 
 		//parte lateral
 		geometry.vertices.push((new THREE.Vector3(1, -2, 3)).multiplyScalar(segment)); // vertice 1 -> 0
