@@ -14,10 +14,16 @@ class Car extends Component{
 		let mainBody = new THREE.BoxGeometry(L_frontal, segment * 2, L_lateral);
 
 		// front bumper
-		let frontBumper = new THREE.Shape();
-		frontBumper.moveTo(1, 1);
-		frontBumper.lineTo(1, -1);
-		front
+		let shape = new THREE.Shape();
+		shape.moveTo(-1, -1);
+		shape.lineTo(-1, 1);
+		shape.lineTo(1, -1);
+		
+		let frontBumper = new THREE.ExtrudeGeometry(shape, {steps: 1,
+			depth: L_frontal + 2, bevelEnabled: false});
+		frontBumper.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0,
+			-(L_frontal + 2) / 2));
+		frontBumper.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2));
 		
 
 		//parte lateral
