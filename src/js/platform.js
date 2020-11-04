@@ -6,7 +6,7 @@ class Platform extends Component {
 
 		super(x, y, z);
 
-		this.addCylinderVertical(0, 0, 0.1, 90, 15,platformColor);
+		this.addCylinderVertical(0, 0, 0.1, 80, 5,platformColor);
 		this.car;
 
 	}

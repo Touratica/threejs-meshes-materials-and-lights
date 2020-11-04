@@ -69,7 +69,6 @@ class Component extends THREE.Object3D {
 
 
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: colour}));
-		console.log(phongMat.material.color);
 
 		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
 			color: colour
