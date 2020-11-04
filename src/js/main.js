@@ -4,6 +4,7 @@ let scene, renderer;
 let clock = new THREE.Clock();
 let cameraRatio = 20;
 
+let car;
 let platform; // objeto palanque inclui o carro consigo. 
 let floor;
 
@@ -52,11 +53,14 @@ function createScene() {
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
 	scene.add(new THREE.AxesHelper(30));
 	floor = new Floor(0,0,0);
-	console.log("floor\n");
+	//console.log("floor\n");
+	car = new Car(100, -10, -125);
 	platform = new Platform(0,0,0);
-	console.log("platform");
-	
-	
+
+	platform.addCar(car);
+	//console.log("platform");
+
+	scene.add(platform);
 	
 
 }
@@ -135,7 +139,8 @@ function onKeyDown(e) {
 			//n entendi o que este faz, se alguem me puder explicar
 			break;
 		case "E":
-		case"e":
+		c//alterar entre o basic e os outros 
+			ase"e":
 			//mudar sombreamento
 			break;
 

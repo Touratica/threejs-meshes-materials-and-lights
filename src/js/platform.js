@@ -1,28 +1,25 @@
 class Platform extends Component {
 
 	constructor(x, y, z) {
+
+		const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126)"
+
 		super(x, y, z);
-		this.currentMesh = this.basicMesh;
+
+		this.addCylinderVertical(obj, 0, 0, 0.1, 90, 15,platformColor);
+		this.car;
+
 	}
 
-	addCar(obj, x, y, z, color) {
-		
+	addCar(car) {
+		this.car = car;
+		this.addCar(car);
 	}
 
-	create(obj, x, y, z) {
-		obj.phongMesh = [];
-		obj.lambertMesh = [];
-		obj.basicMesh = [];
-        const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126)"
-        obj.addCylinderVertical(obj, 0, 0, 0.1, 90, 15,platformColor);
-		
-		// obj.addCar(obj, 100, -10, -125, 0x063B00);
-
-		scene.add(obj);
-
-		obj.position.x = x;
-		obj.position.y = y;
-		obj.position.z = z;
+	changeMesh(flag) { //muda o tipo de mesh, consoante a flag passada
+		//obj pode ser do tipo carro ou palanquete
+		super.changeMesh(flag);
+		this.car.changeMesh(flag);
 	}
 
 	getColor() {

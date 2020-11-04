@@ -1,10 +1,15 @@
 class Component extends THREE.Object3D {
 	constructor(x, y, z) {
-		super();
-		this.create(this, x, y, z);//careful here! xD
+        super();
+        this.phongMesh = [];
+		this.lambertMesh = [];
+        this.basicMesh = [];
+        this.currentMesh = this.basicMesh;
+        
+		//this.create(this, x, y, z);//careful here! xD
 		//nao apagues, poe so em comentario xD
 	}
-	addCuboid(obj, x, y, z, w, h, d, colour) {
+	addCuboid(x, y, z, w, h, d, colour) {
 		let geometry = new THREE.BoxGeometry(d, h, w);
 
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
@@ -25,16 +30,15 @@ class Component extends THREE.Object3D {
 
 		lambertMat.position.set(x,y,z);
 
-		obj.phongMesh.push(phongMat);
-		obj.lambertMesh.push(lambertMat);
-		obj.basicMesh.push(basicMat);
-		obj.add(basicMat);
-
-
+		this.phongMesh.push(phongMat);
+		this.lambertMesh.push(lambertMat);
+        this.basicMesh.push(basicMat);
+        
+        this.add(basicMat);
 
 	}
 
-	addCylinderHorizontal(obj, x, y, z, baseD, baseU,height,colour) {
+	addCylinderHorizontal(x, y, z, baseD, baseU,height,colour) {
 		let geometry = new THREE.CylinderGeometry(baseD / 2, baseU / 2 , height, 16, 1);
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
@@ -47,13 +51,16 @@ class Component extends THREE.Object3D {
 		phongMat.position.set(x,y,z);
 		lambertMat.position.set(x,y,z);
 
-		obj.phongMesh.push(phongMat);
-		obj.lambertMesh.push(lambertMat);
-		obj.basicMesh.push(basicMat);
-		obj.add(phongMat);
-		return phongMat;
-	}
-	addCylinderVertical(obj, x, y, z, base, height,colour) { //problema com a cor
+		this.phongMesh.push(phongMat);
+		this.lambertMesh.push(lambertMat);
+        this.basicMesh.push(basicMat);
+        
+        this.add(basicMat);
+    
+  }
+  
+
+	addCylinderVertical(x, y, z, base, height,colour) { //problema com a cor
 		let geometry = new THREE.CylinderGeometry(base / 2, base / 2, height, 16, 1);
 
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
@@ -76,14 +83,15 @@ class Component extends THREE.Object3D {
 		lambertMat.rotateX(Math.PI / 2);
 
 
-		obj.phongMesh.push(phongMat);
-		obj.lambertMesh.push(lambertMat);
-		obj.basicMesh.push(basicMat);
-		obj.add(basicMat);
+		this.phongMesh.push(phongMat);
+		this.lambertMesh.push(lambertMat);
+        this.basicMesh.push(basicMat);
+        
+        this.add(basicMat);
 
 	}
 
-	addSphere(obj, x, y,z, radius,colour)
+	addSphere(x, y,z, radius,colour)
 	{
 		var geometry = new THREE.SphereGeometry( radius, 32, 32);
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({
@@ -100,12 +108,11 @@ class Component extends THREE.Object3D {
 		phongMat.position.set(x,y,z);
 		lambertMat.position.set(x,y,z);
 
-		obj.phongMesh.push(phong);
-		obj.lambertMesh.push(lambert);
-		obj.basicMesh.push(basic);
-		obj.add(phongMat);
-
-		return phongMat;
+		this.phongMesh.push(phong);
+		this.lambertMesh.push(lambert);
+        this.basicMesh.push(basic);
+        
+        this.add(basicMat);
 	}
 
 	addComponent(comp, x, y, z) {
@@ -115,27 +122,39 @@ class Component extends THREE.Object3D {
 
 	position_set(x,y,z){
 		this.position.set(x,y,z);
+    }
+    
+
+
+	changeMesh(flag ) { //muda o tipo de mesh, consoante a flag passada
+        //obj pode ser do tipo carro ou palanquete
+        this.removeMesh();
+        if (flag === "Phong"){
+            this.addMesh(this.phongMesh);
+        }
+
+        else if (flag === "Lambert"){
+            this.addMesh(this.lambertMesh);
+        }
+
+        else if (flag === "Basic" ){
+            this.addMesh(this.basicMesh);
+        }
+
 	}
 
-	changeMesh(obj, flag ) { //muda o tipo de mesh, consoante a flag passada
-		//obj pode ser do tipo carro ou palanquete
-		/*removeMesh*/
-		/*addMesh*/
-
-
-	}
-
-	addMesh(obj, meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
-		//assim, muda automaticamente a mesh para todos
+	addMesh(meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
+        //assim, muda automaticamente a mesh para todos
+        this.currentMesh = meshVector;
 		for (var i = 0; i < meshVector.length; i++) {
-			obj.add(mesh[i]);
+			this.add(meshVector[i]);
 		}
 	}
 
 	//tira a mesh presente de todos os os objetos presentes em meshVector
-	removeMesh(obj, meshVector) {
-		for (var i = 0; i < meshVector.length; i++) {
-			obj.remove(mesh[i]);
+	removeMesh() {
+		for (var i = 0; i < this.currentMesh.length; i++) {
+			this.remove(this.currentMesh[i]);
 		}
 	}
 
