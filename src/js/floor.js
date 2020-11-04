@@ -3,15 +3,12 @@
  class Floor extends Component {
 
  	constructor(x, y, z) {
-                super(x, y, z);
-                this.currentMesh = this.basicMesh;
+        super(x, y, z);
+        this.currentMesh = this.basicMesh;
             
-	 }
-
-
+	}
 	
  	create(obj, x, y, z) {
-       
         obj.lambertMesh = [];
         obj.basicMesh = [];
         obj.phongMesh = [];

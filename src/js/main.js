@@ -46,8 +46,6 @@ function createPerspectiveCamera(x, y, z) {
 	return camera;
 }
 
-
-
 function createScene() {
 	scene = new THREE.Scene();
 	
