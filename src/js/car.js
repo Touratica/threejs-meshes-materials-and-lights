@@ -1,4 +1,9 @@
 class Car extends Component{
+
+    constructor(x, y, z) {
+        super(x,y,z);
+    }
+    
 	addCar(obj, x, y, z, color, radium) {
 		let L_lateral = radium * 16; //Largura lateral
 		let segment = L_lateral / 28;

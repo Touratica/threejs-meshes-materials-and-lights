@@ -6,14 +6,14 @@ class Platform extends Component {
 
 		super(x, y, z);
 
-		this.addCylinderVertical(obj, 0, 0, 0.1, 90, 15,platformColor);
+		this.addCylinderVertical(0, 0, 0.1, 90, 15,platformColor);
 		this.car;
 
 	}
 
 	addCar(car) {
 		this.car = car;
-		this.addCar(car);
+		this.add(car);
 	}
 
 	changeMesh(flag) { //muda o tipo de mesh, consoante a flag passada

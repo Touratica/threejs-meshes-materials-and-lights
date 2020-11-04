@@ -139,8 +139,7 @@ function onKeyDown(e) {
 			//n entendi o que este faz, se alguem me puder explicar
 			break;
 		case "E":
-		c//alterar entre o basic e os outros 
-			ase"e":
+		//alterar entre o basic e os outros case"e":
 			//mudar sombreamento
 			break;
 
