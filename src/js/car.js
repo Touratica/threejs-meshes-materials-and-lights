@@ -99,12 +99,12 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 28, 1.25)).multiplyScalar(segment)); // vertice 11' -> 22
 		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 29, 5)).multiplyScalar(segment)); // vertice 12' -> 23
 
-		geometry.vertices.push((new THREE.Vector3(1, 18, 3.75)).multiplyScalar(segment)); // vertice 13 -> 24
+		geometry.vertices.push((new THREE.Vector3(1, 18, 4.75)).multiplyScalar(segment)); // vertice 13 -> 24
 		geometry.vertices.push((new THREE.Vector3(1, 18, 0)).multiplyScalar(segment)); // vertice 14 -> 25
 		geometry.vertices.push((new THREE.Vector3(1, 11, 0)).multiplyScalar(segment)); // vertice 15 -> 26
 		geometry.vertices.push((new THREE.Vector3(1, 11, 4.5)).multiplyScalar(segment)); // vertice 16 -> 27
 
-		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 18, 3.75)).multiplyScalar(segment)); // vertice 13' -> 28
+		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 18, 4.75)).multiplyScalar(segment)); // vertice 13' -> 28
 		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 18, 0)).multiplyScalar(segment)); // vertice 14' -> 29
 		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 11, 0)).multiplyScalar(segment)); // vertice 15' -> 30
 		geometry.vertices.push((new THREE.Vector3(-L_frontal-1, 11, 4.5)).multiplyScalar(segment)); // vertice 16' -> 31
@@ -190,12 +190,11 @@ class Car extends Component{
 
 		13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,38,39,40
 		24,25,26,27,32,33,34,35,36,37,38,39,42,43,45,46,47,48,50,51,52,53*/
-		
+		32,36,43
 		//Right surface
 		
-        geometry.faces.push(new THREE.Face3(45, 47, 48,bodyworkColor));
-        //geometry.faces.push(new THREE.Face3(43, 45, 46,bodyworkColor));
-        //geometry.faces.push(new THREE.Face3(45, 46, 48,bodyworkColor));
+      /* geometry.faces.push(new THREE.Face3(45, 47, 48,bodyworkColor));
+		geometry.faces.push(new THREE.Face3(43, 45, 48,bodyworkColor));
         geometry.faces.push(new THREE.Face3(43, 45, 46,bodyworkColor));
         geometry.faces.push(new THREE.Face3(42, 43, 46,bodyworkColor));
 
@@ -205,18 +204,17 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(0, 42, 53,bodyworkColor));
 
         geometry.faces.push(new THREE.Face3(42, 52, 53,bodyworkColor));
-        geometry.faces.push(new THREE.Face3(36, 52, 53,bodyworkColor));
+    	geometry.faces.push(new THREE.Face3(36, 52, 53,bodyworkColor));
         geometry.faces.push(new THREE.Face3(2, 39, 53,bodyworkColor));
-        geometry.faces.push(new THREE.Face3(36, 37, 39,bodyworkColor));
+        geometry.faces.push(new THREE.Face3(37, 39, 53,bodyworkColor));
        
-       	geometry.faces.push(new THREE.Face3(36, 37, 53,bodyworkColor));
+    	geometry.faces.push(new THREE.Face3(36, 37, 53,bodyworkColor));
         geometry.faces.push(new THREE.Face3(2, 4, 39,bodyworkColor));
 		geometry.faces.push(new THREE.Face3(4, 38, 39,bodyworkColor));
 		geometry.faces.push(new THREE.Face3(5, 26, 38,bodyworkColor));
 		geometry.faces.push(new THREE.Face3(4, 5, 38,bodyworkColor));
 
-       geometry.faces.push(new THREE.Face3(5, 6, 26,bodyworkColor));
-      	// geometry.faces.push(new THREE.Face3(6, 26, 38,bodyworkColor));
+       	geometry.faces.push(new THREE.Face3(5, 6, 26,bodyworkColor));
        	geometry.faces.push(new THREE.Face3(26, 38, 39,bodyworkColor));
 		geometry.faces.push(new THREE.Face3(26, 27, 39,bodyworkColor));
 		
@@ -245,17 +243,20 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(18, 34, 50, bodyworkColor));
         geometry.faces.push(new THREE.Face3(34, 35, 50, bodyworkColor));
         geometry.faces.push(new THREE.Face3(35, 36, 50, bodyworkColor));
-        //geometry.faces.push(new THREE.Face3(18, 33, 34, bodyworkColor));
-       
-       geometry.faces.push(new THREE.Face3(33, 34, 36, windowColor)); 
-		geometry.faces.push(new THREE.Face3(34, 36, 35, windowColor)); 
+		geometry.faces.push(new THREE.Face3(24, 27, 32, bodyworkColor));
 		
-        
+       
+       	geometry.faces.push(new THREE.Face3(33, 34, 36, windowColor)); 
+		geometry.faces.push(new THREE.Face3(34, 36, 35, windowColor));
+		
+		geometry.faces.push(new THREE.Face3(36, 51, 50, bodyworkColor)); 
+		
+        */
 
 
 
 		// Left surface
-		/*
+		
 		geometry.faces.push(new THREE.Face3(1, 54, 3, bodyworkColor));	// 1', 40', 2'
 		geometry.faces.push(new THREE.Face3(3, 54, 41, bodyworkColor));	// 2', 40', 24'
 		geometry.faces.push(new THREE.Face3(3, 41, 9, bodyworkColor));	// 2', 24', 3'
@@ -268,6 +269,7 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(44, 49, 57, bodyworkColor)); // 26', 30', 27'
 		geometry.faces.push(new THREE.Face3(57, 49, 58, bodyworkColor)); // 27', 30', 29'
 		geometry.faces.push(new THREE.Face3(1, 49, 44, bodyworkColor)); // 1', 30', 26'
+		
 		geometry.faces.push(new THREE.Face3(54, 55, 61, bodyworkColor)); // 40', 25', 36
 		geometry.faces.push(new THREE.Face3(72, 73, 54, bodyworkColor)); // 21', 22', 40'
 		geometry.faces.push(new THREE.Face3(73, 41, 54, bodyworkColor)); // 22', 24', 40'
@@ -276,33 +278,40 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(31, 41, 73, bodyworkColor)); // 16', 24', 22'
 		geometry.faces.push(new THREE.Face3(30, 40, 41, bodyworkColor)); // 15', 23', 24'
 		geometry.faces.push(new THREE.Face3(10, 40, 30, bodyworkColor)); // 4', 23', 15'
+		
 		geometry.faces.push(new THREE.Face3(31, 73, 68, bodyworkColor)); // 16', 22', 17'
-		geometry.faces.push(new THREE.Face3(30, 41, 73, bodyworkColor)); // 15', 24', 16'
+		geometry.faces.push(new THREE.Face3(30, 41, 31, bodyworkColor)); // 15', 24', 16'
 		geometry.faces.push(new THREE.Face3(10, 30, 11, bodyworkColor)); // 4', 15', 5'
 		geometry.faces.push(new THREE.Face3(28, 31, 68, bodyworkColor)); // 13', 16', 17'
+		
 		geometry.faces.push(new THREE.Face3(29, 30, 31, bodyworkColor)); // 14', 15', 16'
 		geometry.faces.push(new THREE.Face3(28, 68, 69, bodyworkColor)); // 13', 17', 18'
 		geometry.faces.push(new THREE.Face3(29, 31, 28, bodyworkColor)); // 14', 16', 13'
 		geometry.faces.push(new THREE.Face3(11, 30, 29, bodyworkColor)); // 5', 15', 14'
-		geometry.faces.push(new THREE.Face3(11, 30, 12, bodyworkColor)); // 5', 14', 6'
-		geometry.faces.push(new THREE.Face3(12, 30, 13, bodyworkColor)); // 6', 14', 7'
-		geometry.faces.push(new THREE.Face3(13, 30, 28, bodyworkColor)); // 7', 14', 13'
+		geometry.faces.push(new THREE.Face3(11, 29, 12, bodyworkColor)); // 5', 14', 6'
+		
+		geometry.faces.push(new THREE.Face3(12, 29, 13, bodyworkColor)); // 6', 14', 7'
+		geometry.faces.push(new THREE.Face3(13, 29, 28, bodyworkColor)); // 7', 14', 13'
 		geometry.faces.push(new THREE.Face3(72, 61, 74, bodyworkColor)); // 21', 36, 31'
-		geometry.faces.push(new THREE.Face3(61, 71, 74, bodyworkColor)); // 20', 21', 31'
-		geometry.faces.push(new THREE.Face3(70, 61, 74, bodyworkColor)); // 19', 20', 31'
+		geometry.faces.push(new THREE.Face3(71, 72, 74, bodyworkColor)); // 20', 21', 31'
+		
+		geometry.faces.push(new THREE.Face3(70, 71, 74, bodyworkColor)); // 19', 20', 31'
 		geometry.faces.push(new THREE.Face3(23, 70, 74, bodyworkColor)); // 12', 19', 31'
+		
 		geometry.faces.push(new THREE.Face3(23, 69, 70, bodyworkColor)); // 12', 18', 19'
 		geometry.faces.push(new THREE.Face3(23, 28, 69, bodyworkColor)); // 12', 13', 18'
 		geometry.faces.push(new THREE.Face3(13, 28, 19, bodyworkColor)); // 7', 13', 8'
+		
 		geometry.faces.push(new THREE.Face3(19, 28, 20, bodyworkColor)); // 8', 13', 9'
 		geometry.faces.push(new THREE.Face3(20, 28, 23, bodyworkColor)); // 9', 13', 12'
 		geometry.faces.push(new THREE.Face3(20, 23, 21, bodyworkColor)); // 9', 12', 10'
+		
 		geometry.faces.push(new THREE.Face3(21, 23, 22, bodyworkColor)); // 10', 12', 11'
-		geometry.faces.push(new THREE.Face3(70, 72, 61, windowColor)); // 19', 21', 20'
-		geometry.faces.push(new THREE.Face3(69, 71, 70, windowColor)); // 18', 21', 19'
-		*/
-        // front surface
-       /* geometry.faces.push(new THREE.Face3(47, 45, 57, bodyworkColor)); // 29, 27, 27'
+		geometry.faces.push(new THREE.Face3(70, 72, 71, windowColor)); // 19', 21', 20'
+		geometry.faces.push(new THREE.Face3(69, 72, 70, windowColor)); // 18', 21', 19'
+	
+	/*	// front surface
+        geometry.faces.push(new THREE.Face3(47, 45, 57, bodyworkColor)); // 29, 27, 27'
         geometry.faces.push(new THREE.Face3(47, 58, 57, bodyworkColor)); // 29, 29', 27'
         geometry.faces.push(new THREE.Face3(65, 45, 64, bodyworkColor)); // 41, 27, 35 
         geometry.faces.push(new THREE.Face3(45, 64, 46, bodyworkColor)); // 27, 35, 28
@@ -345,14 +354,21 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(18, 50, 23, bodyworkColor)); // 12, 31, 12'
 		geometry.faces.push(new THREE.Face3(18, 23, 22, bodyworkColor)); // 12, 12', 11'
 		geometry.faces.push(new THREE.Face3(17, 18, 22, bodyworkColor)); // 11, 12, 11'
-		console.log(geometry.faces.length);*/
+		*/
 	
 
         geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
-		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({side: THREE.DoubleSide}));
+		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
+			color: "red",
+			side: THREE.DoubleSide}));
 		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({side: THREE.DoubleSide}));
-		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({wireframe:true, side: THREE.DoubleSide}));
+		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ 
+			color: "red",
+			side: THREE.DoubleSide,
+			//wireframe:true
+			//wireframe:false	
+		}));
 
 		
 		phongMat.position.set(x,y,z);
