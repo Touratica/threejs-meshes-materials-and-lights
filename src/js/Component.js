@@ -1,6 +1,7 @@
 class Component extends THREE.Object3D {
 	constructor(x, y, z) {
-        super();
+		super();
+		this.position.set(x,y,z);
         this.phongMesh = [];
 		this.lambertMesh = [];
         this.basicMesh = [];
@@ -38,7 +39,7 @@ class Component extends THREE.Object3D {
 
 	}
 
-	addCylinderHorizontal(x, y, z, baseD, baseU,height,colour) {
+	addCylinderHorizontal(x, y, z, baseD, baseU, height, colour) {
 		let geometry = new THREE.CylinderGeometry(baseD / 2, baseU / 2 , height, 16, 1);
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
@@ -47,9 +48,9 @@ class Component extends THREE.Object3D {
 			color: colour
 		}));
 
-		basicMat.position.set(x,y,z);
-		phongMat.position.set(x,y,z);
-		lambertMat.position.set(x,y,z);
+		basicMat.position.set(x, y, z);
+		phongMat.position.set(x, y, z);
+		lambertMat.position.set(x, y, z);
 
 		this.phongMesh.push(phongMat);
 		this.lambertMesh.push(lambertMat);
@@ -60,7 +61,7 @@ class Component extends THREE.Object3D {
   }
   
 
-	addCylinderVertical(x, y, z, base, height,colour) { //problema com a cor
+	addCylinderVertical(x, y, z, base, height, colour) { //problema com a cor
 		let geometry = new THREE.CylinderGeometry(base / 2, base / 2, height, 16, 1);
 
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
@@ -70,12 +71,10 @@ class Component extends THREE.Object3D {
 
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: colour}));
 
-		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
-			color: colour
-		}));
-		basicMat.position.set(x,y,z);
-		phongMat.position.set(x,y,z);
-		lambertMat.position.set(x,y,z);
+		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: colour}));
+		basicMat.position.set(x, y, z);
+		phongMat.position.set(x, y, z);
+		lambertMat.position.set(x, y, z);
 
 		basicMat.rotateX(Math.PI / 2);
 		phongMat.rotateX(Math.PI / 2);
@@ -90,26 +89,40 @@ class Component extends THREE.Object3D {
 
 	}
 
-	addSphere(x, y,z, radius,colour)
-	{
-		var geometry = new THREE.SphereGeometry( radius, 32, 32);
-		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({
-			color: colour
-		}));
-		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
-			color: colour
-		}));
-		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
-			color: colour
-		}));
+	addSphere(x, y,z, radius, colour) {
+		let geometry = new THREE.SphereGeometry( radius, 32, 32);
+		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: colour, side: THREE.DoubleSide}));
+		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: colour, side: THREE.DoubleSide}));
+		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: colour, side: THREE.DoubleSide}));
 
-		basicMat.position.set(x,y,z);
-		phongMat.position.set(x,y,z);
-		lambertMat.position.set(x,y,z);
+		basicMat.position.set(x, y, z);
+		phongMat.position.set(x, y, z);
+		lambertMat.position.set(x, y, z);
 
-		this.phongMesh.push(phong);
-		this.lambertMesh.push(lambert);
-        this.basicMesh.push(basic);
+		this.phongMesh.push(phongMat);
+		this.lambertMesh.push(lambertMat);
+        this.basicMesh.push(basicMat);
+        
+        this.add(basicMat);
+	}
+
+	addExtrusionGeometry(x, y, z, shape, height, color) {
+		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height,
+			bevelEnabled: false});
+		geometry.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2));
+		geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0, -height / 2));
+
+		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
+		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide}));
+		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));
+
+		basicMat.position.set(x, y, z);
+		phongMat.position.set(x, y, z);
+		lambertMat.position.set(x, y, z);
+
+		this.phongMesh.push(phongMat);
+		this.lambertMesh.push(lambertMat);
+        this.basicMesh.push(basicMat);
         
         this.add(basicMat);
 	}
@@ -145,14 +158,14 @@ class Component extends THREE.Object3D {
 	addMesh(meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
         //assim, muda automaticamente a mesh para todos
         this.currentMesh = meshVector;
-		for (var i = 0; i < meshVector.length; i++) {
+		for (let i = 0; i < meshVector.length; i++) {
 			this.add(meshVector[i]);
 		}
 	}
 
 	//tira a mesh presente de todos os os objetos presentes em meshVector
 	removeMesh() {
-		for (var i = 0; i < this.currentMesh.length; i++) {
+		for (let i = 0; i < this.currentMesh.length; i++) {
 			this.remove(this.currentMesh[i]);
 		}
 	}

@@ -50,20 +50,21 @@ function createPerspectiveCamera(x, y, z) {
 
 function createScene() {
 	scene = new THREE.Scene();
+	scene.background = new THREE.Color("black");
 	
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
 	scene.add(new THREE.AxesHelper(30));
 	floor = new Floor(0,0,0);
 	//console.log("floor\n");
 	//car = new Car(100, -10, -125,radium);
-	car=new Car(0,0,0); //mudar
+	car = new Car(0,0,0,5); //mudar
 	//car.addCar(100,-10,-125,radium)
 	platform = new Platform(0,0,0);
 	platform.addCar(car);
 	//console.log("platform");
 
-	scene.add(platform);
-	scene.add(floor);
+	//scene.add(platform);
+	//scene.add(floor);
 	scene.add(car);
 
 }
@@ -175,7 +176,7 @@ function __init__() {
 
 	createScene();
 
-	PerspectiveCamera = createPerspectiveCamera(40, 40, 40); //perspective view
+	PerspectiveCamera = createPerspectiveCamera(100,0, 60); //perspective view
 	//OrtogonalCamera = createOrtogonalCamera(0, 0, 100);        //view to the platform	
 	//TODO: mudar coordenadas para as do palanque
 	window.addEventListener("resize", onResize)
