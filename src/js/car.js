@@ -320,7 +320,7 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(60, 59, 64 , bodyworkColor)); // 33 , 32 , 35
         geometry.faces.push(new THREE.Face3(59, 64, 63, bodyworkColor)); // 32 , 35 , 34
 
-		/*
+	
 		// back surface
 		geometry.faces.push(new THREE.Face3(21, 74, 23, bodyworkColor)); // 50, 31', 12'
 		geometry.faces.push(new THREE.Face3(18, 74, 23, bodyworkColor)); // 12, 31', 12'
@@ -328,7 +328,7 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(17, 18, 22, bodyworkColor)); // 11, 12, 11'
 		console.log(geometry.faces.length);
 	
-				*/
+
         geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({side: THREE.DoubleSide}));
