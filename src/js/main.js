@@ -176,7 +176,7 @@ function __init__() {
 
 	createScene();
 
-	PerspectiveCamera = createPerspectiveCamera(100,0, 60); //perspective view
+	PerspectiveCamera = createPerspectiveCamera(-20,-45, 80); //perspective view
 	//OrtogonalCamera = createOrtogonalCamera(0, 0, 100);        //view to the platform	
 	//TODO: mudar coordenadas para as do palanque
 	window.addEventListener("resize", onResize)
