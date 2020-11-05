@@ -281,7 +281,6 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(70, 72, 61, windowColor)); // 19', 21', 20'
 		geometry.faces.push(new THREE.Face3(69, 71, 70, windowColor)); // 18', 21', 19'
 		*/
-		
         // front surface
         geometry.faces.push(new THREE.Face3(47, 45, 57, bodyworkColor)); // 29, 27, 27'
         geometry.faces.push(new THREE.Face3(47, 58, 57, bodyworkColor)); // 29, 29', 27'
@@ -322,8 +321,8 @@ class Car extends Component{
 
 	
 		// back surface
-		geometry.faces.push(new THREE.Face3(21, 74, 23, bodyworkColor)); // 50, 31', 12'
-		geometry.faces.push(new THREE.Face3(18, 74, 23, bodyworkColor)); // 12, 31', 12'
+		geometry.faces.push(new THREE.Face3(50, 74, 23, bodyworkColor)); // 31, 31', 12'
+		geometry.faces.push(new THREE.Face3(18, 50, 23, bodyworkColor)); // 12, 31, 12'
 		geometry.faces.push(new THREE.Face3(18, 23, 22, bodyworkColor)); // 12, 12', 11'
 		geometry.faces.push(new THREE.Face3(17, 18, 22, bodyworkColor)); // 11, 12, 11'
 		console.log(geometry.faces.length);
