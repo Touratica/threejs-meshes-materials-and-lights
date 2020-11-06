@@ -113,7 +113,7 @@ class Car extends Component{
 
 		geometry.vertices.push((new THREE.Vector3(0, 16.25, 6.5)).multiplyScalar(segment)); // vertex 19 -> 34
 		//changed to z do 19 de 5 para 6.5
-		geometry.vertices.push((new THREE.Vector3(0.75, 9.75, 8)).multiplyScalar(segment)); // vertex 20 -> 35
+		geometry.vertices.push((new THREE.Vector3(-1, 9.75, 8)).multiplyScalar(segment)); // vertex 20 -> 35
 		geometry.vertices.push((new THREE.Vector3(0.5, 0, 5)).multiplyScalar(segment)); // vertex 21 -> 36
 		geometry.vertices.push((new THREE.Vector3(0.5,4.5,5.125)).multiplyScalar(segment)); // vertex 22 -> 37
 
@@ -166,7 +166,7 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(-1, -5, 3)).multiplyScalar(segment)); // vertex 41 -> 65
 
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -5, 3)).multiplyScalar(segment)); // vertex 42 -> 66
-		geometry.vertices.push((new THREE.Vector3(-L_frontal / 2, -5, 4.525)).multiplyScalar(segment)); // vertex 43 -> 67
+		geometry.vertices.push((new THREE.Vector3(-L_frontal / 2, -5, 3.75)).multiplyScalar(segment)); // vertex 43 -> 67
 		//mudei z que estaca 3.75 , mas por mais valores que ponha nd faz sentdio
 		// back side
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 11.25, 5.5)).multiplyScalar(segment)); // vertex 17' -> 68
@@ -256,7 +256,7 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(35, 36, 50, bodyworkColor));
 		geometry.faces.push(new THREE.Face3(24, 27, 32, bodyworkColor));
 
-		geometry.faces.push(new THREE.Face3(36, 51, 50, bodyworkColor)); 
+		geometry.faces.push(new THREE.Face3(52, 36, 50, bodyworkColor));
 		
         
 
