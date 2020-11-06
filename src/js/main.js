@@ -50,7 +50,7 @@ function createPerspectiveCamera(x, y, z) {
 
 function createScene() {
 	scene = new THREE.Scene();
-	scene.background = new THREE.Color("black");
+	//scene.background = new THREE.Color("black");
 	
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
 	scene.add(new THREE.AxesHelper(30));
@@ -63,8 +63,8 @@ function createScene() {
 	platform.addCar(car);
 	//console.log("platform");
 
-	//scene.add(platform);
-	//scene.add(floor);
+	scene.add(platform);
+	scene.add(floor);
 	scene.add(car);
 
 }
