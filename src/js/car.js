@@ -6,7 +6,7 @@ class Car extends Component{
 		this.lambertMesh = [];
 		let L_lateral = radius * 14; // chassis body width
 		let segment = L_lateral / 28;
-        let L_frontal = 17; // length between center of front wheels
+        let L_frontal = 14; // length between center of front wheels
        	let windowColor = new THREE.Color("rgba(0, 0, 0, 0.8)");
 		let bodyworkColor = new THREE.Color("silver");
 		let chassisColor = new THREE.Color("grey");
@@ -31,7 +31,7 @@ class Car extends Component{
 	    let frontBumper = new Component();
 		frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
 		// TODO: #3 Fix x position to take segment in consideration
-	    chassis.addComponent(frontBumper, -L_frontal / 2, -4 * segment, 0);
+	    chassis.addComponent(frontBumper, -L_frontal / 2 - 4 * segment, -4 * segment, 0);
 
 	    // back bumper
 	    shape = new THREE.Shape();
@@ -42,7 +42,7 @@ class Car extends Component{
 	    let backBumper = new Component();
 	    backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
 		// TODO: #4 Fix x position to take segment in consideration
-		chassis.addComponent(backBumper, -L_frontal / 2, L_lateral - 1.5 * segment, 0);
+		chassis.addComponent(backBumper, -L_frontal / 2 - 4 * segment, L_lateral - 1.5 * segment, 0);
 
 	    // Wheels
 	    let wheelFL = new Component();
