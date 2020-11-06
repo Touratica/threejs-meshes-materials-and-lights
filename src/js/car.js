@@ -17,28 +17,28 @@ class Car extends Component{
 
 		// chassis body
 	    let mainBody = new Component();
-	    mainBody.addCuboid(0, 0, 0, L_lateral, (L_frontal + 2) * segment, 2 * segment, chassisColor);
-		chassis.addComponent(mainBody, -L_lateral / 2 + 3 * segment, -(L_frontal / 2 + 1) * segment);
+	    mainBody.addCuboid(0, 0, 0, L_lateral, 2 * segment, (L_frontal + 2) * segment, chassisColor);
+		chassis.addComponent(mainBody, -(L_frontal / 2 + 1) * segment, (L_lateral / 2 - 3) * segment, 0);
 
 		// front bumper
 		let shape = new THREE.Shape();
 		shape.moveTo(-segment, -segment);
 		shape.lineTo(-segment, segment);
-		shape.lineTo(segment, -segment);
+		shape.lineTo(segment, segment);
 
 		let frontBumper = new Component();
 		frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
-		chassis.addComponent(frontBumper, 4 * segment, -(L_frontal / 2 + 1) * segment, 0);
+		chassis.addComponent(frontBumper, -(L_frontal / 2 + 1) * segment, -4 * segment, 0);
 
 		// back bumper
 		shape = new THREE.Shape();
-		shape.moveTo(-1.5 * segment, -1.25 * segment);
-		shape.lineTo(1.5 * segment, segment);
-		shape.lineTo(1.5 * segment, -segment);
+		shape.moveTo(-segment, -1.5 * segment);
+		shape.lineTo(-1.25 * segment, 1.5 * segment);
+		shape.lineTo(segment, -1.5 * segment);
 
 		let backBumper = new Component();
 		backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
-		chassis.addComponent(backBumper, -L_lateral - 1.5 * segment, -(L_frontal / 2 + 1) * segment, 0);
+		chassis.addComponent(backBumper, -(L_frontal / 2 + 1) * segment, L_lateral - 1.5 * segment, 0);
 
 		// Wheels
 		let wheelFL = new Component();
@@ -47,15 +47,15 @@ class Car extends Component{
 
 	    let wheelFR = new Component();
 	    wheelFR.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
-	    chassis.addComponent(wheelFR, 0, -L_frontal * segment, 0);
+	    chassis.addComponent(wheelFR, -L_frontal * segment, 0, 0);
 
 	    let wheelBR = new Component();
 	    wheelBR.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
-		chassis.addComponent(wheelBR, -L_lateral + 6 * segment, -L_frontal * segment, 0);
+		chassis.addComponent(wheelBR, -L_frontal * segment, L_lateral - 6 * segment, 0);
 
 	    let wheelBL = new Component();
 	    wheelBL.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
-		chassis.addComponent(wheelBL, -L_lateral + 6 * segment, 0, 0);
+		chassis.addComponent(wheelBL, 0, L_lateral - 6 * segment, 0);
 
 		// TODO: Add chassis to car
 		//this.addComponent(chassis,0,0,0);

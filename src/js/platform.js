@@ -1,5 +1,4 @@
 class Platform extends Component {
-
 	constructor(x, y, z) {
 
 		const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126)"
@@ -7,7 +6,6 @@ class Platform extends Component {
 		super(x, y, z);
 
 		this.addCylinderVertical(0, 0, 0.1, 80, 5,platformColor);
-		this.car;
 
 	}
 
