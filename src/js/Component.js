@@ -108,7 +108,7 @@ class Component extends THREE.Object3D {
 
 	addHorizontalExtrusion(x, y, z, shape, height, color) {
 		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height, bevelEnabled: false});
-		geometry.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2));
+		geometry.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2));
 		geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0, -height / 2));
 
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
