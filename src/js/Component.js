@@ -39,6 +39,8 @@ class Component extends THREE.Object3D {
 
 	}
 
+	
+
 	addCylinderHorizontal(x, y, z, baseD, baseU, height, colour) {
 		let geometry = new THREE.CylinderGeometry(baseD / 2, baseU / 2 , height, 16, 1);
 		geometry.rotateZ(Math.PI / 2);

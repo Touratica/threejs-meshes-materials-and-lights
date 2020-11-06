@@ -57,15 +57,15 @@ function createScene() {
 	floor = new Floor(0,0,0);
 	//console.log("floor\n");
 	//car = new Car(100, -10, -125,radium);
-	car = new Car(0,0,0,5); //mudar
+	car = new Car(9,-15,3.5,5); //mudar
 	//car.addCar(100,-10,-125,radium)
 	platform = new Platform(0,0,0);
-	//platform.addCar(car);
+	platform.addCar(car);
 	//console.log("platform");
 
-	//scene.add(platform);
-	//scene.add(floor);
-	scene.add(car);
+	scene.add(platform);
+	scene.add(floor);
+	//scene.add(car);
 
 }
 
@@ -76,13 +76,13 @@ function animate() {
 
 	let timeDelta = clock.getDelta();
 
-	/*if (platorm.get_rotation() === "Left") {
+	if (platform.get_rotation() === "Left") {
 		platform.rotate_z(angSpeed * timeDelta);
-	}*/
+	}
 
-	/*if (platorm.get_rotation() === "Right") {
-		platorm.rotate_z(-angSpeed * timeDelta);
-	}*/
+	if (platform.get_rotation() === "Right") {
+		platform.rotate_z(-angSpeed * timeDelta);
+	}
 
 
 	renderer.render(scene, camera);
@@ -148,11 +148,11 @@ function onKeyDown(e) {
 			break;
 
 		case "ArrowRight":
-			//platform.set_rotation("Right");
+			platform.set_rotation("Right");
 			break;
 
 		case "ArrowLeft":
-			//platform.set_rotation("Left");
+			platform.set_rotation("Left");
 			break;
 
 	}
@@ -162,7 +162,7 @@ function onKeyUp(e) {
 	switch (e.key) {
 		case "ArrowRight":
 		case "ArrowLeft":
-			//platform.set_rotation("Stop");
+			platform.set_rotation("Stop");
 			break;
 	}
 }
@@ -177,7 +177,7 @@ function __init__() {
 	createScene();
 	//PerspectiveCamera = createPerspectiveCamera(60,0, 20); //Lateral
 	//PerspectiveCamera = createPerspectiveCamera(-95,0, 20); // Lateral
-	PerspectiveCamera = createPerspectiveCamera(45, -45, 15); //Frontal
+	PerspectiveCamera = createPerspectiveCamera(-45, -45, 25); //Frontal
 	//PerspectiveCamera = createPerspectiveCamera(-25 ,100, 20); //Back
 	//OrtogonalCamera = createOrtogonalCamera(0, 0, 100);        //view to the platform	
 	//TODO: mudar coordenadas para as do palanque

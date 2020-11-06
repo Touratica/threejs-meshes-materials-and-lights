@@ -4,10 +4,12 @@ class Platform extends Component {
 		const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126)"
 
 		super(x, y, z);
+		
 
-		this.addCylinderVertical(0, 0, 0.1, 80, 5,platformColor);
-
+		this.addCylinderVertical(0, 0, 0.1, 100, 5,platformColor);
+		this.rotation_Z = "Stop";
 	}
+	
 
 	addCar(car) {
 		this.car = car;
@@ -20,7 +22,34 @@ class Platform extends Component {
 		this.car.changeMesh(flag);
 	}
 
-	getColor() {
-		return this.currentMesh.Color;
+	
+	get_rotation()
+	{
+		return this.rotation_Z;
 	}
+	set_rotation(rot){
+		this.rotation_Z = rot;
+	}
+	rotate_z(angle) {
+        if (this.angle >= (Math.PI) / 3 && this.rotate_z == "Left"){
+            return;
+        }
+
+        if (this.angle >= -(Math.PI) / 3 && this.rotate_z == "Right"){
+            return;
+        }
+
+        var a = this.angle + angle;
+
+        if (a >= Math.PI / 3) {
+            this.angle = (Math.PI) / 3;
+            return;
+        }
+        else if (a <= -Math.PI / 3) {
+            this.angle = -Math.PI / 3;
+            return;
+        }
+        this.angle = a;
+        this.rotateZ(angle);
+    }
 }
