@@ -29,7 +29,8 @@ class Car extends Component{
 	    shape.lineTo(segment, -segment);
 
 	    let frontBumper = new Component();
-	    frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
+		frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
+		// TODO: #3 Fix x position to take segment in consideration
 	    chassis.addComponent(frontBumper, -L_frontal / 2, -4 * segment, 0);
 
 	    // back bumper
@@ -40,7 +41,8 @@ class Car extends Component{
 
 	    let backBumper = new Component();
 	    backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
-	    chassis.addComponent(backBumper, -L_frontal / 2, L_lateral - 1.5 * segment, 0);
+		// TODO: #4 Fix x position to take segment in consideration
+		chassis.addComponent(backBumper, -L_frontal / 2, L_lateral - 1.5 * segment, 0);
 
 	    // Wheels
 	    let wheelFL = new Component();
