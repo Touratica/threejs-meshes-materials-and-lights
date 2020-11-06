@@ -380,7 +380,7 @@ class Car extends Component{
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ 
 			color: bodyworkColor,
 			side: THREE.DoubleSide,
-			 //wireframe:true
+			 wireframe:true
 		}));
 		
 		phongMat.position.set(x, y, z);
@@ -401,8 +401,12 @@ class Car extends Component{
 		let geometry = new THREE.Geometry();
 		let L_lateral = radius * 14; // chassis body width
 		let segment = L_lateral / 28;
-        let L_frontal = 14; // length between center of front wheels
+		let L_frontal = 14; // length between center of front wheels
+		
+		//Vidro de cima
 
+
+		/*
 		geometry.vertices.push((new THREE.Vector3(0, 16.25, 6.5)).multiplyScalar(segment)); // vertex 19 -> 0
 		//changed to z do 19 de 5 para 6.5
 		geometry.vertices.push((new THREE.Vector3(0.75, 9.75, 8)).multiplyScalar(segment)); // vertex 20 -> 1
@@ -418,11 +422,21 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(-L_frontal, -3, 4.525)).multiplyScalar(segment)); // vertex 36 -> 8
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1 + 0.5, 9, 8.125)).multiplyScalar(segment)); // vertex 37 -> 9
 		geometry.vertices.push((new THREE.Vector3(-1 - 0.5, 9, 8.125)).multiplyScalar(segment)); // vertex 38 -> 10
+
 		//farol esquerdo
+		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -4 , 4.35)).multiplyScalar(segment)); // vertex 25' -> 19
+		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -4, 4)).multiplyScalar(segment)); // vertex 32 -> 20
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -5, 3.75)).multiplyScalar(segment)); // vertex 33 -> 11
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -5, 3)).multiplyScalar(segment)); // vertex 42 -> 12
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -5, 3.875)).multiplyScalar(segment)); // vertex 28' -> 13
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -5, 3)).multiplyScalar(segment)); // vertex 27' -> 14
+
+		geometry.faces.push(new THREE.Face3(19, 20, 11, windowColor)); //25' 32, 33
+		geometry.faces.push(new THREE.Face3(19, 13, 11, windowColor)); //25' 28', 33
+
+		geometry.faces.push(new THREE.Face3(14, 13, 12, windowColor)); // 27',28',42
+		geometry.faces.push(new THREE.Face3(11, 13, 12, windowColor)); // 33,28',42
+
 		//farol direito
 
 		geometry.vertices.push((new THREE.Vector3(1, -5, 3)).multiplyScalar(segment)); // vertex 27 -> 15
@@ -430,36 +444,28 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(-1, -5, 3.75)).multiplyScalar(segment)); // vertex 35 -> 17
 		geometry.vertices.push((new THREE.Vector3(-1, -5, 3)).multiplyScalar(segment)); // vertex 41 -> 18
 		
-		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -4 , 4.35)).multiplyScalar(segment)); // vertex 25' -> 19
-		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -4, 4)).multiplyScalar(segment)); // vertex 32 -> 20
-		
 		geometry.vertices.push((new THREE.Vector3(-1, -4, 4)).multiplyScalar(segment)); // vertex 34 -> 21
 		geometry.vertices.push((new THREE.Vector3(1, -4, 4.25)).multiplyScalar(segment)); // vertex 25 -> 22
-		geometry.vertices.push((new THREE.Vector3(0, -3, 4.525)).multiplyScalar(segment)); // vertex 39 -> 23
+
 		geometry.faces.push(new THREE.Face3(16, 17, 21, windowColor)); //28 35, 34
 		geometry.faces.push(new THREE.Face3(22, 16, 21, windowColor)); //25 28, 34
-		
 
+		geometry.faces.push(new THREE.Face3(7, 15, 18, windowColor)); // 35,27,41
+		geometry.faces.push(new THREE.Face3(16, 15, 7, windowColor)); // 28,27,35
+		
 		//right surface
 		geometry.faces.push(new THREE.Face3(4, 5, 6, windowColor)); //40
 		geometry.faces.push(new THREE.Face3(3, 4, 6, windowColor));//41
 
-		//Front surface -> Alterei de left
+		//Front surface
+		geometry.vertices.push((new THREE.Vector3(0, -3, 4.525)).multiplyScalar(segment)); // vertex 39 -> 23
+
 		geometry.faces.push(new THREE.Face3(4, 6,5, windowColor)); // 19', 21', 20'
 		geometry.faces.push(new THREE.Face3(3, 6, 4, windowColor)); // 18', 21', 19'
 
 		geometry.faces.push(new THREE.Face3(23, 8, 9, windowColor)); // 39,36,37
 		geometry.faces.push(new THREE.Face3(23, 10, 9, windowColor)); // 39,38,37
-
-		geometry.faces.push(new THREE.Face3(14, 13, 12, windowColor)); // 27',28',42
-		geometry.faces.push(new THREE.Face3(11, 13, 12, windowColor)); // 33,28',42
-
-
-		geometry.faces.push(new THREE.Face3(7, 15, 18, windowColor)); // 35,27,41
-		geometry.faces.push(new THREE.Face3(16, 15, 7, windowColor)); // 28,27,35
-
-		geometry.faces.push(new THREE.Face3(19, 20, 11, windowColor)); //25' 32, 33
-		geometry.faces.push(new THREE.Face3(19, 13, 11, windowColor)); //25' 28', 33
+		*/
 
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
