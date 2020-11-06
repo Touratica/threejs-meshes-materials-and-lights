@@ -6,7 +6,7 @@ class Car extends Component{
 		this.lambertMesh = [];
 		let L_lateral = radius * 14; // chassis body width
 		let segment = L_lateral / 28;
-        let L_frontal = 14; // length between center of front wheels
+        let L_frontal = 17; // length between center of front wheels
        	let windowColor = new THREE.Color("rgba(0, 0, 0, 0.8)");
 		let bodyworkColor = new THREE.Color("silver");
 		let chassisColor = new THREE.Color("grey");
@@ -14,53 +14,56 @@ class Car extends Component{
         
 		let geometry = new THREE.Geometry();
 
-		// chassis
+	    // chassis
 	    let chassis = new Component();
 
-		// chassis body
+	    // chassis body
 	    let mainBody = new Component();
 	    mainBody.addCuboid(0, 0, 0, L_lateral, 2 * segment, (L_frontal + 2) * segment, chassisColor);
-		chassis.addComponent(mainBody, -(L_frontal / 2 + 1) * segment, (L_lateral / 2 - 3) * segment, 0);
+	    chassis.addComponent(mainBody, -(L_frontal / 2) * segment,L_lateral / 2 - 3 * segment,0);
 
-		// front bumper
-		let shape = new THREE.Shape();
-		shape.moveTo(-segment, -segment);
-		shape.lineTo(-segment, segment);
-		shape.lineTo(segment, segment);
+	    // front bumper
+	    let shape = new THREE.Shape();
+	    shape.moveTo(-segment, segment);
+	    shape.lineTo(segment, segment);
+	    shape.lineTo(segment, -segment);
 
-		let frontBumper = new Component();
+	    let frontBumper = new Component();
 		frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
-		chassis.addComponent(frontBumper, -(L_frontal / 2 + 1) * segment, -4 * segment, 0);
+		// TODO: #3 Fix x position to take segment in consideration
+	    chassis.addComponent(frontBumper, -L_frontal / 2, -4 * segment, 0);
 
-		// back bumper
-		shape = new THREE.Shape();
-		shape.moveTo(-segment, -1.5 * segment);
-		shape.lineTo(-1.25 * segment, 1.5 * segment);
-		shape.lineTo(segment, -1.5 * segment);
+	    // back bumper
+	    shape = new THREE.Shape();
+	    shape.moveTo(-segment, -1.50 * segment);
+	    shape.lineTo(1.25 * segment, 1.5 * segment);
+	    shape.lineTo(segment, -1.5 * segment);
 
-		let backBumper = new Component();
-		backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
-		chassis.addComponent(backBumper, -(L_frontal / 2 + 1) * segment, L_lateral - 1.5 * segment, 0);
+	    let backBumper = new Component();
+	    backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
+		// TODO: #4 Fix x position to take segment in consideration
+		chassis.addComponent(backBumper, -L_frontal / 2, L_lateral - 1.5 * segment, 0);
 
-		// Wheels
-		let wheelFL = new Component();
-		wheelFL.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
-		chassis.addComponent(wheelFL, 0, 0, 0);
+	    // Wheels
+	    let wheelFL = new Component();
+	    wheelFL.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+	    chassis.addComponent(wheelFL, 0, 0, 0);
 
 	    let wheelFR = new Component();
-	    wheelFR.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
+	    wheelFR.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
 	    chassis.addComponent(wheelFR, -L_frontal * segment, 0, 0);
 
 	    let wheelBR = new Component();
-	    wheelBR.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
-		chassis.addComponent(wheelBR, -L_frontal * segment, L_lateral - 6 * segment, 0);
+	    wheelBR.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+	    chassis.addComponent(wheelBR, -L_frontal * segment, L_lateral - 6 * segment, 0);
 
 	    let wheelBL = new Component();
-	    wheelBL.addCylinderHorizontal(0, 0, 0, radius, radius, 2 * segment, wheelsColor);
-		chassis.addComponent(wheelBL, 0, L_lateral - 6 * segment, 0);
+	    wheelBL.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+	    chassis.addComponent(wheelBL, 0, L_lateral - 6 * segment, 0);
 
-		// TODO: Add chassis to car
-		//this.addComponent(chassis,0,0,0);
+		this.addComponent(chassis,0,0,0);
+
+
 		//parte lateral
 		geometry.vertices.push((new THREE.Vector3(1, -2, 3)).multiplyScalar(segment)); // vertex 1 -> 0
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -2, 3)).multiplyScalar(segment)); // vertex 1' -> 1

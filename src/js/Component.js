@@ -11,7 +11,7 @@ class Component extends THREE.Object3D {
 		//nao apagues, poe so em comentario xD
 	}
 	addCuboid(x, y, z, w, h, d, colour) {
-		let geometry = new THREE.BoxGeometry(d, h, w);
+		let geometry = new THREE.BoxGeometry(d, w, h);
 
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
 
@@ -41,6 +41,7 @@ class Component extends THREE.Object3D {
 
 	addCylinderHorizontal(x, y, z, baseD, baseU, height, colour) {
 		let geometry = new THREE.CylinderGeometry(baseD / 2, baseU / 2 , height, 16, 1);
+		geometry.rotateZ(Math.PI / 2);
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
 			color: colour }));
@@ -108,17 +109,15 @@ class Component extends THREE.Object3D {
 
 	addHorizontalExtrusion(x, y, z, shape, height, color) {
 		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height, bevelEnabled: false});
-		geometry.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2));
-		geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0, -height / 2));
-
+		geometry.rotateY(-Math.PI / 2);
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide}));
 		let lambertMat = new THREE.Mesh(geometry,
 			new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));
 
-		basicMat.position.set(x, y, z);
-		phongMat.position.set(x, y, z);
-		lambertMat.position.set(x, y, z);
+		basicMat.position.set(x + height / 2, y, z);
+		phongMat.position.set(x + height / 2, y, z);
+		lambertMat.position.set(x + height / 2, y, z);
 
 		this.phongMesh.push(phongMat);
 		this.lambertMesh.push(lambertMat);
