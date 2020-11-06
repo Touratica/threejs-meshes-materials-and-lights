@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b9c05143-97b7-41a8-99ef-46e9523e0252" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Component.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/car.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/car.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +76,8 @@
       <workItem from="1603320359946" duration="3810000" />
       <workItem from="1604505567908" duration="1019000" />
       <workItem from="1604526668301" duration="2868000" />
+      <workItem from="1604661387543" duration="1756000" />
+      <workItem from="1604663313154" duration="55000" />
     </task>
     <servers />
   </component>
@@ -179,9 +182,10 @@
     </state>
     <state x="346" y="72" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604506543514" />
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603144203027" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603147288838">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="539" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1604661969389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="539" y="183" width="840" height="856" key="search.everywhere.popup/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604661969389" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603147288838" />
   </component>
 </project>

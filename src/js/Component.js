@@ -106,15 +106,15 @@ class Component extends THREE.Object3D {
         this.add(basicMat);
 	}
 
-	addExtrusionGeometry(x, y, z, shape, height, color) {
-		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height,
-			bevelEnabled: false});
+	addHorizontalExtrusion(x, y, z, shape, height, color) {
+		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height, bevelEnabled: false});
 		geometry.applyMatrix4(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2));
 		geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 0, -height / 2));
 
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide}));
-		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));
+		let lambertMat = new THREE.Mesh(geometry,
+			new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));
 
 		basicMat.position.set(x, y, z);
 		phongMat.position.set(x, y, z);
@@ -132,13 +132,13 @@ class Component extends THREE.Object3D {
 		comp.position.set(x, y, z);
 	}
 
-	position_set(x,y,z){
+	position_set(x, y, z){
 		this.position.set(x,y,z);
     }
     
 
 
-	changeMesh(flag ) { //muda o tipo de mesh, consoante a flag passada
+	changeMesh(flag) { //muda o tipo de mesh, consoante a flag passada
         //obj pode ser do tipo carro ou palanquete
         this.removeMesh();
         if (flag === "Phong"){
