@@ -433,6 +433,11 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -4 , 4.35)).multiplyScalar(segment)); // vertex 25' -> 19
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -4, 4)).multiplyScalar(segment)); // vertex 32 -> 20
 		
+		geometry.vertices.push((new THREE.Vector3(-1, -4, 4)).multiplyScalar(segment)); // vertex 34 -> 21
+		geometry.vertices.push((new THREE.Vector3(1, -4, 4.25)).multiplyScalar(segment)); // vertex 25 -> 22
+		geometry.vertices.push((new THREE.Vector3(0, -3, 4.525)).multiplyScalar(segment)); // vertex 39 -> 23
+		geometry.faces.push(new THREE.Face3(16, 17, 21, windowColor)); //28 35, 34
+		geometry.faces.push(new THREE.Face3(22, 16, 21, windowColor)); //25 28, 34
 
 		geometry.faces.push(new THREE.Face3(19, 20, 11, windowColor)); //25' 32, 33
 		geometry.faces.push(new THREE.Face3(19, 13, 11, windowColor)); //25' 28', 33
@@ -445,8 +450,8 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(4, 6,5, windowColor)); // 19', 21', 20'
 		geometry.faces.push(new THREE.Face3(3, 6, 4, windowColor)); // 18', 21', 19'
 
-		geometry.faces.push(new THREE.Face3(7, 8, 9, windowColor)); // 35,36,37
-		geometry.faces.push(new THREE.Face3(7, 10, 9, windowColor)); // 35,38,37
+		geometry.faces.push(new THREE.Face3(23, 8, 9, windowColor)); // 39,36,37
+		geometry.faces.push(new THREE.Face3(23, 10, 9, windowColor)); // 39,38,37
 
 		geometry.faces.push(new THREE.Face3(14, 13, 12, windowColor)); // 27',28',42
 		geometry.faces.push(new THREE.Face3(11, 13, 12, windowColor)); // 33,28',42
@@ -469,7 +474,7 @@ class Car extends Component{
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ 
 			color: windowColor,
 			side: THREE.DoubleSide,
-			// wireframe:true
+			 wireframe:true
 		}));
 		
 		phongMat.position.set(x, y, z);
