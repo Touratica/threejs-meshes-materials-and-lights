@@ -1,5 +1,5 @@
 'use strict';
-class DirectionalLight extends Component {
+class SpotLight extends Component {
 
   light;
 
@@ -10,7 +10,7 @@ class DirectionalLight extends Component {
     this.light.intensity = 1;
 
     this.light.position.set(x, y, z);
-    
+
     if (flag == 0)
     {
       this.light.target = painting.children[6];
