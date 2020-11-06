@@ -175,17 +175,10 @@ function __init__() {
 	document.body.appendChild(renderer.domElement);
 
 	createScene();
-<<<<<<< HEAD
 	//PerspectiveCamera = createPerspectiveCamera(60,0, 20); //Lateral
 	//PerspectiveCamera = createPerspectiveCamera(-95,0, 20); // Lateral
 	PerspectiveCamera = createPerspectiveCamera(-20,-45, 15); //Frontal
 	//PerspectiveCamera = createPerspectiveCamera(-25 ,100, 20); //Back
-=======
-	PerspectiveCamera = createPerspectiveCamera(60,0, 20); //Lateral
-	//PerspectiveCamera = createPerspectiveCamera(-115,0, 20); // Lateral
-	//PerspectiveCamera = createPerspectiveCamera(-20,-45, 80); //Frontal
-	//PerspectiveCamera = createPerspectiveCamera(5,100, 20); //Back
->>>>>>> 059774bc7f10d11672834c5ffaf9f02618cac66e
 	//OrtogonalCamera = createOrtogonalCamera(0, 0, 100);        //view to the platform	
 	//TODO: mudar coordenadas para as do palanque
 	window.addEventListener("resize", onResize)

@@ -470,7 +470,7 @@ class Car extends Component{
 		this.basicMesh.push(basicMat);
 		this.add(basicMat);
 
-
+*/
 
 	}
 }
