@@ -60,11 +60,11 @@ function createScene() {
 	car = new Car(0,0,0,5); //mudar
 	//car.addCar(100,-10,-125,radium)
 	platform = new Platform(0,0,0);
-	platform.addCar(car);
+	//platform.addCar(car);
 	//console.log("platform");
 
-	scene.add(platform);
-	scene.add(floor);
+	//scene.add(platform);
+	//scene.add(floor);
 	scene.add(car);
 
 }
@@ -176,9 +176,9 @@ function __init__() {
 
 	createScene();
 	PerspectiveCamera = createPerspectiveCamera(60,0, 20); //Lateral
-	//PerspectiveCamera = createPerspectiveCamera(-95,0, 20); // Lateral
+	//PerspectiveCamera = createPerspectiveCamera(-115,0, 20); // Lateral
 	//PerspectiveCamera = createPerspectiveCamera(-20,-45, 80); //Frontal
-	//PerspectiveCamera = createPerspectiveCamera(-25 ,100, 20); //Back
+	//PerspectiveCamera = createPerspectiveCamera(5,100, 20); //Back
 	//OrtogonalCamera = createOrtogonalCamera(0, 0, 100);        //view to the platform	
 	//TODO: mudar coordenadas para as do palanque
 	window.addEventListener("resize", onResize)
