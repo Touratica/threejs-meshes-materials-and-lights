@@ -16,9 +16,8 @@ class Car extends Component{
 	    let chassis = new Component();
 
 		// chassis body
-		let mainBody = new THREE.BoxGeometry(L_lateral, (L_frontal + 2) * segment, 2 * segment);
-		mainBody.applyMatrix4(new THREE.Matrix4().makeTranslation(-L_lateral / 2 + 3 * segment,
-			-L_frontal * segment / 2, 0));
+	    let mainBody = new Component();
+	    mainBody.addCuboid(0, 0, 0, L_lateral, (L_frontal + 2) * segment, 2 * segment, chassisColor);
 		chassis.addComponent(mainBody, -L_lateral / 2 + 3 * segment, -(L_frontal / 2 + 1) * segment);
 
 		// front bumper
