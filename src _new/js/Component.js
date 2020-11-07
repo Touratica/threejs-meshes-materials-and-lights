@@ -6,9 +6,7 @@ class Component extends THREE.Object3D {
         this.phongMesh = [];
 		this.lambertMesh = [];
         this.basicMesh = [];
-        
-		//this.create(this, x, y, z);//careful here! xD
-		//nao apagues, poe so em comentario xD
+    
 	}
 	addCuboid(x, y, z, w, h, d, colour) {
 		let geometry = new THREE.BoxGeometry(d, w, h);
@@ -30,8 +28,7 @@ class Component extends THREE.Object3D {
 		this.phongMesh.push(phongMat);
 		this.lambertMesh.push(lambertMat);
 		this.basicMesh.push(basicMat);
-		//this.currentMesh = this.phongMesh;
-        
+		
         this.add(basicMat);
 
 	}
@@ -58,7 +55,7 @@ class Component extends THREE.Object3D {
     
     }
 
-	addCylinderVertical(x, y, z, base, height, colour) { //problema com a cor
+	addCylinderVertical(x, y, z, base, height, colour) { 
 		let geometry = new THREE.CylinderGeometry(base / 2, base / 2, height, 16, 1);
 
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
@@ -122,6 +119,18 @@ class Component extends THREE.Object3D {
         this.add(basicMat);
 	}
 
+	addCone( x, y, z) {
+		let geometry = new THREE.ConeGeometry(5, 8, 64, 1, true, 0);
+		
+		let material = new THREE.MeshBasicMaterial({
+		  color: "rgb(241, 202, 1)"
+		});
+		let cone = new THREE.Mesh(geometry, material);
+		cone.rotateX(Math.PI/2);
+		cone.position.set(x, y, z);
+		this.add(cone);
+	}
+
 	addComponent(comp, x, y, z) {
 		this.add(comp);
 		comp.position.set(x, y, z);
@@ -159,15 +168,16 @@ class Component extends THREE.Object3D {
 		}
 	}
 
-	addMesh(meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
-        //assim, muda automaticamente a mesh para todos
+	//mesh vector has all objects of the scene. 
+	//addMesh changes all the meshes.
+	addMesh(meshVector) { 
         this.currentMesh = meshVector;
 		for (let i = 0; i < meshVector.length; i++) {
 			this.add(meshVector[i]);
 		}
 	}
 
-	//tira a mesh presente de todos os os objetos presentes em meshVector
+	//removes the mesh of all objects.
 	removeMesh() {
 		for (let i = 0; i < this.currentMesh.length; i++) {
 			this.remove(this.currentMesh[i]);

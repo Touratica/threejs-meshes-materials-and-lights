@@ -36,7 +36,7 @@ function createOrtogonalCamera(x, y, z) {
 	camera.position.x = x;
 	camera.position.y = y;
 	camera.position.z = z;
-	camera.lookAt(scene.position);
+	camera.lookAt(platform.position);
 	return camera;
 }
 
@@ -54,39 +54,33 @@ function createPerspectiveCamera(x, y, z) {
 
 function createScene() {
 	scene = new THREE.Scene();
-	//scene.background = new THREE.Color("black");
+	scene.background = new THREE.Color("black");
 	
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
-	scene.add(new THREE.AxesHelper(30));
+	//scene.add(new THREE.AxesHelper(30));
 	floor = new Floor(0,0,0);
 	
-	//car = new Car(100, -10, -125,radium);
-	car = new Car(9,-15,4.5,5); //mudar
-	//car.addCar(100,-10,-125,radium)
+	
+	car = new Car(9,-15,4.5,5); 
 	platform = new Platform(0,0,0);
 	platform.addCar(car);
-
-	//spotlights[0] = new SpotLight(150, 100, 200, 0);
-	spotlights[0] = new SpotLight(150, 100, 75, 0);
-    spotlights[0].rotateZ(-45);
-    spotlights[0].setPosition(6, 180, 0);
-
-   	/*spotlights[1] = new SpotLight(500, 110, 100, 1);
-    spotlights[1].rotateZ(-45);
-    spotlights[1].setPosition(6, 180, 0);
-*/
-    //spotlights[2] = new SpotLight(150, 100, -75, 2);
-    //spotlights[2].rotateZ(-45);
-   // spotlights[2].setPosition(6, 180, 0);
 	
-
 	scene.add(platform);
 	scene.add(floor);
-	//scene.add(car);
 
+	spotlights[0] = new SpotLight(0, -80, 40);
+	const spotLightHelper = new THREE.SpotLightHelper(spotlights[0].light );
+	//scene.add( spotLightHelper );	
+	spotlights[0].rotateX(Math.PI/4);
+	
+   	spotlights[1] = new SpotLight(-80, 0, 40);
+	spotlights[1].rotateY(-Math.PI/4);
+
+    spotlights[2] = new SpotLight(80, 0, 40);
+	spotlights[2].rotateY(Math.PI/4);
+	
 	directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
-   // directionalLight.position.set(-45, -45, 25);
-   	directionalLight.position.set(-95, 0, 25);
+  	directionalLight.position.set(-95, 0, 25);
 	scene.add(directionalLight);
 
 }
@@ -98,6 +92,7 @@ function animate() {
 
 	let timeDelta = clock.getDelta();
 
+	//rotates the platform
 	if (platform.get_rotation() === "Left") {
 		platform.rotate_z(angSpeed * timeDelta);
 	}
@@ -106,14 +101,22 @@ function animate() {
 		platform.rotate_z(-angSpeed * timeDelta);
 	}
 
+	if(spotlights[0].turnLight) {
+		spotlights[0].OnOff();
+	}
+	
+	if(spotlights[1].turnLight){
+		spotlights[1].OnOff();
+	}
+
+	if(spotlights[2].turnLight){
+		spotlights[2].OnOff();
+	}
+
+	//turns on/off the directional light
 	if (on_off_Directional == 1) {
         on_off_Directional = 0;
-        /*if (directionalLight.visible == true)
-			//directionalLight.intensity = 0;
-			directionalLight.visible = false;
-        else
-			//directionalLight.intensity = 1;
-			directionalLight.visible = true;*/
+        
 			directionalLight.visible = !directionalLight.visible;
     }
 
@@ -149,15 +152,15 @@ function onResize() {
 function onKeyDown(e) {
 	switch (e.key) {
 		case "1":
-			//turnOnLigth(0)
+			spotlights[0].turn_Light();
 			onResize();
 			break;
 		case "2":
-			//turnOnLigth(1)
+			spotlights[1].turn_Light();
 			onResize();
 			break;
 		case "3":
-			//turnOnLight(2)
+			spotlights[2].turn_Light();
 			onResize();
 			break;
 		case "4":
@@ -166,9 +169,9 @@ function onKeyDown(e) {
 		case "5":
 			camera = OrtogonalCamera;
 			break;
-		case "Q":
+		case "Q": //switches the light On/Off
 		case "q":
-			//directionLigh(Onn/Off)
+			
 			on_off_Directional = 1;
 			break;
 		case "W": // changes between Basic and one of the others
@@ -184,7 +187,7 @@ function onKeyDown(e) {
 			platform.changeMesh("changeShadow");
 			break;
 
-		case "ArrowRight":
+		case "ArrowRight": //rotates the platform
 			platform.set_rotation("Right");
 			break;
 
@@ -198,7 +201,7 @@ function onKeyDown(e) {
 function onKeyUp(e) {
 	switch (e.key) {
 		case "ArrowRight":
-		case "ArrowLeft":
+		case "ArrowLeft": //stops the platform
 			platform.set_rotation("Stop");
 			break;
 	}
@@ -212,12 +215,9 @@ function __init__() {
 	document.body.appendChild(renderer.domElement);
 
 	createScene();
-	//PerspectiveCamera = createPerspectiveCamera(90,20, 20); //Lateral
-	PerspectiveCamera = createPerspectiveCamera(-95,0, 25); // Lateral
-	//PerspectiveCamera = createPerspectiveCamera(-45, -45, 25); //Frontal
-	//PerspectiveCamera = createPerspectiveCamera(-25 ,100, 20); //Back
-	OrtogonalCamera = createOrtogonalCamera(0, 0, 100);        //view to the platform	
-	//TODO: mudar coordenadas para as do palanque
+	OrtogonalCamera = createOrtogonalCamera(0, 100, 0);        //view to the platform	
+	PerspectiveCamera = createPerspectiveCamera(-40, -90, 40); 
+	
 	window.addEventListener("resize", onResize)
 	window.addEventListener("keydown", onKeyDown);
 	window.addEventListener("keyup", onKeyUp);

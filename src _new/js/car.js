@@ -2,7 +2,7 @@ class Car extends Component{
     constructor(x, y, z,radius) {
 		super(x, y, z);
 		let L_lateral = radius * 11; // chassis body width
-		let segment = L_lateral / 28;
+		let segment = L_lateral / 28; //unity 
         let L_frontal = 14; // length between center of front wheels
 		let chassisColor = new THREE.Color("rgb(3, 4, 6)");
 		let wheelsColor = new THREE.Color("rgb(10, 11, 15)");
@@ -57,13 +57,13 @@ class Car extends Component{
 		this.chassis.addComponent(this.wheelBL, 0, L_lateral - 6 * segment, 0);
 		
 		this.set_chassis();
-		this.addComponent(this.chassis, 9 , -15,  4.2);
+		this.addComponent(this.chassis, 9 , -15,  4.2+0.8);
 
 
 		//parte lateral
 		geometry.vertices.push((new THREE.Vector3(1, -2, 3)).multiplyScalar(segment)); // vertex 1 -> 0
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -2, 3)).multiplyScalar(segment)); // vertex 1' -> 1
-		//changed to p -l
+		
 		geometry.vertices.push((new THREE.Vector3(1, 2, 3)).multiplyScalar(segment)); // vertex 2 -> 2
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, 2, 3)).multiplyScalar(segment)); // vertex 2' -> 3
 
@@ -111,7 +111,7 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(0.5, 16.5, 5.75)).multiplyScalar(segment)); // vertex 18 -> 33
 
 		geometry.vertices.push((new THREE.Vector3(0, 16.25, 6.5)).multiplyScalar(segment)); // vertex 19 -> 34
-		//changed to z do 19 de 5 para 6.5
+		
 		geometry.vertices.push((new THREE.Vector3(-1, 9.75, 8)).multiplyScalar(segment)); // vertex 20 -> 35
 		geometry.vertices.push((new THREE.Vector3(0.5, 0, 5)).multiplyScalar(segment)); // vertex 21 -> 36
 		geometry.vertices.push((new THREE.Vector3(0.5,4.5,5.125)).multiplyScalar(segment)); // vertex 22 -> 37
@@ -138,16 +138,7 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(1, 0, 4)).multiplyScalar(segment)); // vertex 40 -> 53
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, 0, 4)).multiplyScalar(segment)); // vertex 40' -> 54
 
-		/*
-		1,2,3,4,5,6,7,8,
-		0,2,4,5,6,7,8,14,
 
-		9,10,11,12,
-		15,16,17,18
-
-		13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,38,39,40
-		24,25,26,27,32,33,34,35,36,37,38,39,42,43,45,46,47,48,50,51,52,53*/
-		// changed
 		// parte frontal
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -4 , 4.35)).multiplyScalar(segment)); // vertex 25' -> 55
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 1, -5, 3.875)).multiplyScalar(segment)); // vertex 28' -> 56
@@ -166,25 +157,27 @@ class Car extends Component{
 
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, -5, 3)).multiplyScalar(segment)); // vertex 42 -> 66
 		geometry.vertices.push((new THREE.Vector3(-L_frontal / 2, -3, 4.525)).multiplyScalar(segment)); // vertex 43 -> 67
-		//mudei z que estaca 3.75 , mas por mais valores que ponha nd faz sentdio
 		// back side
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 11.25, 5.5)).multiplyScalar(segment)); // vertex 17' -> 68
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 16.5, 5.75)).multiplyScalar(segment)); // vertex 18' -> 69
 		geometry.vertices.push((new THREE.Vector3(-L_frontal, 16.25, 6.5)).multiplyScalar(segment)); // vertex 19' -> 70
-		// also changed z of 19'
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 0.75, 9.75, 8)).multiplyScalar(segment)); // vertex 20' -> 71
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 0,5)).multiplyScalar(segment)); // vertex 21' -> 72
 		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 4.5, 5.125)).multiplyScalar(segment)); // vertex 22' -> 73
+		
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, 9.75, 8.25)).multiplyScalar(segment)); // vertex 31' -> 74
+		
 		this.createBody(geometry,radius,x,y,z);
 		this.createWindow(x,y,z,radius);
 		this.currentMesh = this.basicMesh;
 		this.lastMesh = this.lambertMesh;    
 	}
 
+	/* Creates the body of the car */ 
+
 	createBody(geometry,radius,x,y,z){
 		let L_lateral = radius * 14; // chassis body width
-		let bodyworkColor = new THREE.Color("rgb(80, 85, 90)");
+		let bodyworkColor = new THREE.Color("rgb(99, 112, 123)");
 		//right surface
 		
 
@@ -204,16 +197,7 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(2, 39, 53,bodyworkColor));//2,24,40
         geometry.faces.push(new THREE.Face3(37 , 53 , 39,bodyworkColor));//22,24,40
 	   
-		
-		/*1,2,3,4,5,6,7,8,
-		0,2,4,5,6,7,8,14,
-
-		9,10,11,12,
-		15,16,17,18
-
-		13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,38,39,40
-		24,25,26,27,32,33,34,35,36,37,38,39,42,43,45,46,47,48,50,51,52,53
-		32,36,43*/
+	
 		geometry.faces.push(new THREE.Face3(  37 ,  36,  53,bodyworkColor));//,22 ,21,40
 		
 
@@ -261,14 +245,9 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(35,50, 36, bodyworkColor));// 20 , 31, 21
 		geometry.faces.push(new THREE.Face3(32, 27, 24, bodyworkColor));//17,16,13
 
-		//geometry.faces.push(new THREE.Face3(52, 36, 50, bodyworkColor));
 		geometry.faces.push(new THREE.Face3(42, 36,  50, bodyworkColor));//25 , 21 ,31
         
 		// Left surface
-
-		//4',23',3'?
-	//	geometry.faces.push(new THREE.Face3(10, 40, 9, bodyworkColor));	// 4', 23', 3'
-//adicionei , n fez diferenca
 
 		geometry.faces.push(new THREE.Face3(1, 54, 3, bodyworkColor));	// 1', 40', 2'
 		geometry.faces.push(new THREE.Face3( 54,  41,  3, bodyworkColor));	// 54', 24', 2'
@@ -277,11 +256,10 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(1, 44,55, bodyworkColor)); // 1', 26', 25'
 		geometry.faces.push(new THREE.Face3(44, 49, 57, bodyworkColor)); // 27', 30', 26'
 		
-		//fiquei aqui . jo
+		
 		geometry.faces.push(new THREE.Face3(57, 49, 58, bodyworkColor)); // 27', 30', 29'
 		geometry.faces.push(new THREE.Face3(44, 1, 49, bodyworkColor)); // 40', 1', 30'
 		
-		//geometry.faces.push(new THREE.Face3(54, 55, 61, bodyworkColor)); // 40', 25', 36
 		geometry.faces.push(new THREE.Face3(72, 73, 54, bodyworkColor)); // 21', 22', 40'
 		geometry.faces.push(new THREE.Face3(73, 41, 54, bodyworkColor)); // 22', 24', 40'
 		geometry.faces.push(new THREE.Face3(41, 40, 9, bodyworkColor)); // 24', 23', 3'
@@ -303,7 +281,6 @@ class Car extends Component{
 		
 		geometry.faces.push(new THREE.Face3(12, 29, 13, bodyworkColor)); // 6', 14', 7'
 		geometry.faces.push(new THREE.Face3(13, 29, 28, bodyworkColor)); // 7', 14', 13'
-		//geometry.faces.push(new THREE.Face3(72, 61, 74, bodyworkColor)); // 21', 36, 31'
 		geometry.faces.push(new THREE.Face3(71, 72, 74, bodyworkColor)); // 20', 21', 31'
 		
 		geometry.faces.push(new THREE.Face3(70, 71, 74, bodyworkColor)); // 19', 20', 31'
@@ -376,7 +353,7 @@ class Car extends Component{
 		lambertMat.position.set(x, y, z);
 
 		basicMat.position.set(x, y, z);
-		// TODO: does this work?
+
 		this.phongMesh.push(phongMat);  
 		this.lambertMesh.push(lambertMat);
 		this.basicMesh.push(basicMat);
@@ -386,8 +363,8 @@ class Car extends Component{
 	}
 	createWindow(x,y,z,radius){	
 		let windowColor = new THREE.Color("rgb(11, 10, 15)");
-		//let windowColor = new THREE.Color("yellow");
 		let geometry = new THREE.Geometry();
+
 		let L_lateral = radius * 11; // chassis body width
 		let segment = L_lateral / 28;
 		let L_frontal = 14; // length between center of front wheels
@@ -496,7 +473,6 @@ class Car extends Component{
 		lambertMat.position.set(x, y, z);
 
 		basicMat.position.set(x, y, z);
-		// TODO: does this work?
 		this.phongMesh.push(phongMat);  
 		this.lambertMesh.push(lambertMat);
 		this.basicMesh.push(basicMat);
