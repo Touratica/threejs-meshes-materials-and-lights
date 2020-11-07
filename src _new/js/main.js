@@ -60,7 +60,7 @@ function createScene() {
 	floor = new Floor(0,0,0);
 	
 	//car = new Car(100, -10, -125,radium);
-	car = new Car(9,-15,3.5,5); //mudar
+	car = new Car(9,-15,4.5,5); //mudar
 	//car.addCar(100,-10,-125,radium)
 	platform = new Platform(0,0,0);
 	platform.addCar(car);
@@ -93,10 +93,12 @@ function animate() {
 
 	if (onn_off_Directional == 1) {
         onn_off_Directional = 0;
-        if (directionalLight.intensity == 1)
-            directionalLight.intensity = 0;
+        if (directionalLight.visible == true)
+			//directionalLight.intensity = 0;
+			directionalLight.visible = false;
         else
-            directionalLight.intensity = 1;
+			//directionalLight.intensity = 1;
+			directionalLight.visible = true;
     }
 
 
@@ -131,7 +133,6 @@ function onResize() {
 function onKeyDown(e) {
 	switch (e.key) {
 		case "1":
-		
 			//turnOnLigth(0)
 			onResize();
 			break;
@@ -152,16 +153,15 @@ function onKeyDown(e) {
 		case "Q":
 		case "q":
 			//directionLigh(Onn/Off)
-			on_off_Directional = 1;
-            
+			onn_off_Directional = 1;
 			break;
-		case "W":
+		case "W": // changes between Basic and one of the others
 		case "w":
-			//n entendi o que este faz, se alguem me puder explicar
+
 			break;
-		case "E":
-		//alterar entre o basic e os outros case"e":
-			//mudar sombreamento
+		case "E": // changes between Phong and Gouraud
+		case "e":
+			
 			break;
 
 		case "ArrowRight":

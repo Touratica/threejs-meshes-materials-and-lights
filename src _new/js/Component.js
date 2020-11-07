@@ -113,7 +113,7 @@ class Component extends THREE.Object3D {
 		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height, bevelEnabled: false});
 		geometry.rotateY(-Math.PI / 2);
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
-		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide}));
+		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide, specular: 0x424849}));
 		let lambertMat = new THREE.Mesh(geometry,
 			new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));
 
@@ -155,7 +155,29 @@ class Component extends THREE.Object3D {
         }
 
 	}
-
+/* 	updateMesh(obj, changeShadow) {
+		if (changeShadow) {
+			if (obj.currentMesh == obj.phongMesh) {
+				obj.removeMesh(obj, obj.phongMesh);
+				obj.addMesh(obj, obj.lambertMesh);
+				obj.currentMesh = obj.lambertMesh;
+			} else if (obj.currentMesh == obj.lambertMesh) {
+				obj.removeMesh(obj, obj.lambertMesh);
+				obj.addMesh(obj, obj.phongMesh);
+				obj.currentMesh = obj.phongMesh;
+		  	}
+		  	else if (obj.currentMesh == obj.basicMesh) {
+				obj.removeMesh(obj, obj.basicMesh);
+				obj.addMesh(obj, obj.phongMesh);
+				obj.currentMesh = obj.phongMesh;
+			}
+		} else {
+			obj.removeMesh(obj, obj.currentMesh);
+			obj.addMesh(obj, obj.basicMesh);
+			obj.currentMesh = obj.basicMesh;
+		}
+	}
+ */
 	addMesh(meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
         //assim, muda automaticamente a mesh para todos
         this.currentMesh = meshVector;
