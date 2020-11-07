@@ -9,8 +9,8 @@ class Car extends Component{
         let L_frontal = 14; // length between center of front wheels
        	let windowColor = new THREE.Color("rgba(0, 0, 0, 0.8)");
 		let bodyworkColor = new THREE.Color("silver");
-		let chassisColor = new THREE.Color("grey");
-		let wheelsColor = new THREE.Color("black");
+		let chassisColor = new THREE.Color("black");
+		let wheelsColor = new THREE.Color("grey");
         
 		let geometry = new THREE.Geometry();
 
@@ -416,26 +416,31 @@ class Car extends Component{
 
 		geometry.vertices.push((new THREE.Vector3(-1, -5, 3)).multiplyScalar(segment)); // vertex 41 -> 17
 
-		/*
-		vertex 37 -> 0
-		vertex 38 -> 1
-		vertex 36 -> 2
-		vertex 39 -> 3
-		vertex 25 -> 4
-		vertex 26 -> 5
-		vertex 26' -> 6
-		vertex 27 -> 7
-		vertex 28 -> 8
-		vertex 25' -> 9
-		vertex 28' -> 10
-		vertex 27' -> 11
-		vertex 32 -> 12
-		vertex 33 -> 13
-		vertex 35 -> 14
-		vertex 34 -> 15
-		vertex 42 -> 16
-		vertex 41 -> 17
-		*/	
+		geometry.vertices.push((new THREE.Vector3(0.5, 16.5, 5.75)).multiplyScalar(segment)); // vertex 18 -> 18
+
+		geometry.vertices.push((new THREE.Vector3(0, 16.25, 6.5)).multiplyScalar(segment)); // vertex 19 -> 19
+
+		geometry.vertices.push((new THREE.Vector3(-1, 9.75, 8)).multiplyScalar(segment)); // vertex 20 -> 20
+
+		geometry.vertices.push((new THREE.Vector3(0.5, 0, 5)).multiplyScalar(segment)); // vertex 21 -> 21
+
+		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 16.5, 5.75)).multiplyScalar(segment)); // vertex 18' -> 22
+
+		geometry.vertices.push((new THREE.Vector3(-L_frontal, 16.25, 6.5)).multiplyScalar(segment)); // vertex 19' -> 23
+
+		geometry.vertices.push((new THREE.Vector3(-L_frontal + 0.75, 9.75, 8)).multiplyScalar(segment)); // vertex 20' -> 24
+
+		geometry.vertices.push((new THREE.Vector3(-L_frontal - 0.5, 0,5)).multiplyScalar(segment)); // vertex 21' -> 25
+
+		//Vidro Esquerdo
+
+		geometry.faces.push(new THREE.Face3(19, 20, 21, windowColor)); // 19, 20 , 21
+		geometry.faces.push(new THREE.Face3(18, 19, 21, windowColor)); // 18, 19 , 21
+
+		//Vidro Direito
+
+		geometry.faces.push(new THREE.Face3(23, 24, 25, windowColor)); // 19', 20' , 21'
+		geometry.faces.push(new THREE.Face3(22, 23, 25, windowColor)); // 18', 19' , 21'
 
 		//Vidro de cima
 		
