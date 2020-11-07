@@ -1,9 +1,6 @@
 class Car extends Component{
     constructor(x, y, z,radius) {
 		super(x, y, z);
-		this.phongMesh = [];
-		this.basicMesh = [];
-		this.lambertMesh = [];
 		let L_lateral = radius * 11; // chassis body width
 		let segment = L_lateral / 28;
         let L_frontal = 14; // length between center of front wheels
@@ -181,15 +178,7 @@ class Car extends Component{
 		this.createBody(geometry,radius,x,y,z);
 		this.createWindow(x,y,z,radius);
 		this.currentMesh = this.basicMesh;
-		this.lastMesh = this.lambertMesh;
-		
-		/*======================================================================
-		Surfaces
-		======================================================================*/
-//src e car correto
-		
-		
-       
+		this.lastMesh = this.lambertMesh;    
 	}
 
 	createBody(geometry,radius,x,y,z){
@@ -479,7 +468,6 @@ class Car extends Component{
 
 		geometry.faces.push(new THREE.Face3(17, 7, 14, windowColor)); // 41, 27, 35 
 		geometry.faces.push(new THREE.Face3(7, 8, 14, windowColor)); // 27, 35, 28
-		//aquiii
         geometry.faces.push(new THREE.Face3(8, 15, 14, windowColor)); // 28, 34, 35
         geometry.faces.push(new THREE.Face3(15, 8, 4, windowColor)); // 34, 28, 25
 
@@ -492,13 +480,14 @@ class Car extends Component{
 		}));
 		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
 			color: windowColor ,
-			side: THREE.DoubleSide}));
+			side: THREE.DoubleSide
+		}));
 		
 		
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ 
 			color: windowColor,
 			side: THREE.DoubleSide,
-			wireframe:true
+			//wireframe:true
 		}));
 		
 		phongMat.position.set(x, y, z);
@@ -515,4 +504,15 @@ class Car extends Component{
 
 
 	}
-}
+
+/* 	changeMesh(flag){
+		super.changeMesh(flag);
+		this.frontBumper.changeMesh(flag);
+		this.wheelBL.changeMesh(flag);
+		this.wheelBR.changeMesh(flag);
+		this.wheelFL.changeMesh(flag);
+		this.wheelFR.changeMesh(flag);
+		this.backBumper.changeMesh(flag);
+		this.mainBody.changeMesh(flag);
+	}
+ */}

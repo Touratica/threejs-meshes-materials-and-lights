@@ -1,13 +1,9 @@
-'use strict';
-
- class Floor extends Component {
-
+class Floor extends Component {
  	constructor(x, y, z) {
-              const colour =  new THREE.Color("rgb(55, 52, 67)");
-              super(x, y, z);
-              this.addCuboid(0, 0, 0, 150, 0, 150,colour);
-              this.currentMesh = this.phongMesh;
-            
+        const color = new THREE.Color("rgb(55, 52, 67)");
+        super(x, y, z);
+        this.addCuboid(0, 0, 0, 150, 1, 150, color);
+        this.currentMesh = this.basicMesh;
+        this.lastMesh = this.lambertMesh;
 	}
-	
  }

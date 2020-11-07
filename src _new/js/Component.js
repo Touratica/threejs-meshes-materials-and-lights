@@ -1,3 +1,4 @@
+
 class Component extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
@@ -5,8 +6,6 @@ class Component extends THREE.Object3D {
         this.phongMesh = [];
 		this.lambertMesh = [];
         this.basicMesh = [];
-        this.currentMesh = this.basicMesh;
-        this.lastMesh = this.lambertMesh;
         
 		//this.create(this, x, y, z);//careful here! xD
 		//nao apagues, poe so em comentario xD
@@ -16,10 +15,6 @@ class Component extends THREE.Object3D {
 
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
 
-		/* ew THREE.MeshPhongMaterial
-			  (
-				  {color: "rgb(55, 52, 67)" }
-		));*/
 
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: colour}));
 
@@ -34,7 +29,8 @@ class Component extends THREE.Object3D {
 
 		this.phongMesh.push(phongMat);
 		this.lambertMesh.push(lambertMat);
-        this.basicMesh.push(basicMat);
+		this.basicMesh.push(basicMat);
+		//this.currentMesh = this.phongMesh;
         
         this.add(phongMat);
 
@@ -110,7 +106,7 @@ class Component extends THREE.Object3D {
 	addHorizontalExtrusion(x, y, z, shape, height, color) {
 		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height, bevelEnabled: false});
 		geometry.rotateY(-Math.PI / 2);
-		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
+		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide, specular: 0x424849}));
 		let lambertMat = new THREE.Mesh(geometry,
 			new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));

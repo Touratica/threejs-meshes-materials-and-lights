@@ -4,8 +4,9 @@ let scene, renderer;
 let clock = new THREE.Clock();
 let cameraRatio = 20;
 
-var directionalLight;
-var onn_off_Directional = 0;
+let directionalLight;
+let onn_off_Directional = 0;
+let spotlights = [];
 
 let car;
 let radium = 2; //raio da roda
@@ -64,15 +65,28 @@ function createScene() {
 	//car.addCar(100,-10,-125,radium)
 	platform = new Platform(0,0,0);
 	platform.addCar(car);
-	
+
+	spotlights[0] = new SpotLight(150, 100, 200, 0);
+    spotlights[0].rotateZ(-45);
+    spotlights[0].setPosition(6, 180, 0);
+/*
+    spotlights[1] = new SpotLight(150, 100, 75, 1);
+    spotlights[1].rotateZ(-45);
+    spotlights[1].setPosition(6, 180, 0);
+
+    spotlights[2] = new SpotLight(150, 100, -75, 2);
+    spotlights[2].rotateZ(-45);
+    spotlights[2].setPosition(6, 180, 0);
+	*/
 
 	scene.add(platform);
 	scene.add(floor);
 	//scene.add(car);
 
-	directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(-45, -45, 25);
-    scene.add(directionalLight);
+	directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+   // directionalLight.position.set(-45, -45, 25);
+   	directionalLight.position.set(-95, 0, 25);
+	scene.add(directionalLight);
 
 }
 
@@ -158,12 +172,14 @@ function onKeyDown(e) {
 		case "W": // changes between Basic and one of the others
 		case "w":
 			// TODO: Has to change every object
-			car.changeMesh();
+			floor.changeMesh();
+			platform.changeMesh();
 			break;
 		case "E": // changes between Phong and Gouraud
 		case "e":
 			// TODO: Has to change every object
-			car.changeMesh("changeShadow");
+			floor.changeMesh("changeShadow");
+			platform.changeMesh("changeShadow");
 			break;
 
 		case "ArrowRight":

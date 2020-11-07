@@ -2,11 +2,14 @@ class Platform extends Component {
 	constructor(x, y, z) {
 
 		const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126) rgb(137, 116, 126)"
+		//const platformColor =  new THREE.Color("black"); //"rgb(137, 116, 126) rgb(137, 116, 126)"
 
 		super(x, y, z);
 		
 
 		this.addCylinderVertical(0, 0, 0.1, 100, 5,platformColor);
+		this.currentMesh = this.basicMesh;
+		this.lastMesh = this.lambertMesh;
 		this.rotation_Z = "Stop";
 	}
 	
