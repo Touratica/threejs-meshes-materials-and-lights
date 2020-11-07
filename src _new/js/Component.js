@@ -6,6 +6,7 @@ class Component extends THREE.Object3D {
 		this.lambertMesh = [];
         this.basicMesh = [];
         this.currentMesh = this.basicMesh;
+        this.lastMesh = this.lambertMesh;
         
 		//this.create(this, x, y, z);//careful here! xD
 		//nao apagues, poe so em comentario xD
@@ -39,8 +40,6 @@ class Component extends THREE.Object3D {
 
 	}
 
-	
-
 	addCylinderHorizontal(x, y, z, baseD, baseU, height, colour) {
 		let geometry = new THREE.CylinderGeometry(baseD / 2, baseU / 2 , height, 16, 1);
 		geometry.rotateZ(Math.PI / 2);
@@ -61,8 +60,7 @@ class Component extends THREE.Object3D {
         
         this.add(phongMat);
     
-  }
-  
+    }
 
 	addCylinderVertical(x, y, z, base, height, colour) { //problema com a cor
 		let geometry = new THREE.CylinderGeometry(base / 2, base / 2, height, 16, 1);
@@ -136,48 +134,35 @@ class Component extends THREE.Object3D {
 	position_set(x, y, z){
 		this.position.set(x,y,z);
     }
-    
 
-
-	changeMesh(flag) { //muda o tipo de mesh, consoante a flag passada
-        //obj pode ser do tipo carro ou palanquete
-        this.removeMesh();
-        if (flag === "Phong"){
-            this.addMesh(this.phongMesh);
+	changeMesh(flag) {
+		if (flag === "changeShadow") {
+	        if (this.currentMesh === this.lambertMesh) {
+				this.removeMesh();
+	            this.addMesh(this.phongMesh);
+	        }
+	        else if (this.currentMesh === this.phongMesh) {
+	        	this.removeMesh();
+	        	this.addMesh(this.lambertMesh);
+	        }
+	        else {
+	        	this.removeMesh();
+	        	this.addMesh(this.lastMesh);
+	        }
         }
-
-        else if (flag === "Lambert"){
-            this.addMesh(this.lambertMesh);
-        }
-
-        else if (flag === "Basic" ){
-            this.addMesh(this.basicMesh);
-        }
-
-	}
-/* 	updateMesh(obj, changeShadow) {
-		if (changeShadow) {
-			if (obj.currentMesh == obj.phongMesh) {
-				obj.removeMesh(obj, obj.phongMesh);
-				obj.addMesh(obj, obj.lambertMesh);
-				obj.currentMesh = obj.lambertMesh;
-			} else if (obj.currentMesh == obj.lambertMesh) {
-				obj.removeMesh(obj, obj.lambertMesh);
-				obj.addMesh(obj, obj.phongMesh);
-				obj.currentMesh = obj.phongMesh;
-		  	}
-		  	else if (obj.currentMesh == obj.basicMesh) {
-				obj.removeMesh(obj, obj.basicMesh);
-				obj.addMesh(obj, obj.phongMesh);
-				obj.currentMesh = obj.phongMesh;
+		else {
+			if (this.currentMesh !== this.basicMesh) {
+				this.removeMesh();
+				this.lastMesh = this.currentMesh;
+				this.addMesh(this.basicMesh);
 			}
-		} else {
-			obj.removeMesh(obj, obj.currentMesh);
-			obj.addMesh(obj, obj.basicMesh);
-			obj.currentMesh = obj.basicMesh;
+			else {
+				this.removeMesh();
+				this.addMesh(this.lastMesh);
+			}
 		}
 	}
- */
+
 	addMesh(meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
         //assim, muda automaticamente a mesh para todos
         this.currentMesh = meshVector;
@@ -192,5 +177,4 @@ class Component extends THREE.Object3D {
 			this.remove(this.currentMesh[i]);
 		}
 	}
-
 }

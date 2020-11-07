@@ -157,11 +157,13 @@ function onKeyDown(e) {
 			break;
 		case "W": // changes between Basic and one of the others
 		case "w":
-
+			// TODO: Has to change every object
+			car.changeMesh();
 			break;
 		case "E": // changes between Phong and Gouraud
 		case "e":
-			
+			// TODO: Has to change every object
+			car.changeMesh("changeShadow");
 			break;
 
 		case "ArrowRight":

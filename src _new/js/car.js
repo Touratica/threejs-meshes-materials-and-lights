@@ -180,7 +180,8 @@ class Car extends Component{
 		geometry.vertices.push((new THREE.Vector3(-L_frontal + 1, 9.75, 8.25)).multiplyScalar(segment)); // vertex 31' -> 74
 		this.createBody(geometry,radius,x,y,z);
 		this.createWindow(x,y,z,radius);
-		
+		this.currentMesh = this.basicMesh;
+		this.lastMesh = this.lambertMesh;
 		
 		/*======================================================================
 		Surfaces

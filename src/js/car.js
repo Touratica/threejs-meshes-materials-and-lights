@@ -318,8 +318,8 @@ class Car extends Component{
 		geometry.faces.push(new THREE.Face3(20, 23, 21, bodyworkColor)); // 9', 12', 10'
 		
 		geometry.faces.push(new THREE.Face3(21, 23, 22, bodyworkColor)); // 10', 12', 11'
-		geometry.faces.push(new THREE.Face3(72, 61,54, bodyworkColor));//21' 36 40'
-		*/
+		geometry.faces.push(new THREE.Face3(72, 61,54, bodyworkColor)); //21' 36 40'
+
 		// front surface
         geometry.faces.push(new THREE.Face3(47, 45, 57, bodyworkColor)); // 29, 27, 27'
         geometry.faces.push(new THREE.Face3(47, 57, 58, bodyworkColor)); // 29,27, 29'

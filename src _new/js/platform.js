@@ -39,7 +39,7 @@ class Platform extends Component {
             return;
         }
 
-        var a = this.angle + angle;
+        let a = this.angle + angle;
 
         if (a >= Math.PI / 3) {
             this.angle = (Math.PI) / 3;
