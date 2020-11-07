@@ -32,7 +32,7 @@ class Component extends THREE.Object3D {
 		this.basicMesh.push(basicMat);
 		//this.currentMesh = this.phongMesh;
         
-        this.add(phongMat);
+        this.add(basicMat);
 
 	}
 
@@ -54,7 +54,7 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
     
     }
 
@@ -82,7 +82,7 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
 
 	}
 
@@ -100,7 +100,7 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
 	}
 
 	addHorizontalExtrusion(x, y, z, shape, height, color) {
@@ -119,7 +119,7 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
 	}
 
 	addComponent(comp, x, y, z) {

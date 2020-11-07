@@ -1,8 +1,5 @@
-'use strict';
 class SpotLight extends Component {
-
-  light;
-
+  light
   constructor(x, y, z, index) {
     
     super(x, y, z);
@@ -23,10 +20,10 @@ class SpotLight extends Component {
 
     else if (index == 1)//luz 2
     {
-      this.light.target = platform.children[0];
-      //this.light.lookAt(0,platform.y,0);
-      this.light.angle = 0.55;
-      this.light.distance = 350;
+      this.light.target = platform;
+     // this.light.lookAt(0,platform.y,0);
+      this.light.angle = 0.35;
+      this.light.distance = 0;
     }
    /* else if (index == 2)
     {
@@ -35,7 +32,7 @@ class SpotLight extends Component {
     }*/
     else //luz 3
     {
-      this.light.target = platform.children[0];
+      this.light.target = floor.children[1];
      // this.light.lookAt(0,0,platform.z);
       this.light.angle = 0.25;
     }
@@ -56,23 +53,24 @@ class SpotLight extends Component {
   }
 
   addCone( x, y, z) {
-    var geometry = new THREE.ConeBufferGeometry(5, 20, 32, 1, true, 0);
+    let geometry = new THREE.ConeGeometry(5, 20, 32, 1, true, 0);
     
-    var material = new THREE.MeshBasicMaterial({
-      color: 0x0000ff
+    let material = new THREE.MeshBasicMaterial({
+      color: "rgb(241, 202, 1)"
     });
-    var cone = new THREE.Mesh(geometry, material);
+    let cone = new THREE.Mesh(geometry, material);
     cone.position.set(x, y, z);
     this.add(cone);
+    console.log("add do cone");
   }
 
   addSphere(x, y, z) {
-    var geometry = new THREE.SphereGeometry(2, 32, 32);
-    var material = new THREE.MeshBasicMaterial({
+    let geometry = new THREE.SphereGeometry(2, 32, 32);
+    let material = new THREE.MeshBasicMaterial({
       color: "rgb(241, 202, 1)"
     });
 
-    var sphere = new THREE.Mesh(geometry, material);
+    let sphere = new THREE.Mesh(geometry, material);
     sphere.position.set(x, y, z);
     this.add(sphere);
   }

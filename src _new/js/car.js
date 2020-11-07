@@ -10,12 +10,12 @@ class Car extends Component{
 		let geometry = new THREE.Geometry();
 
 	    // chassis
-	    let chassis = new Component();
+	    this.chassis = new Component();
 
 	    // chassis body
-	    let mainBody = new Component();
-	    mainBody.addCuboid(0, 0, 0, L_lateral, 2 * segment, (L_frontal - 2) * segment, chassisColor);
-	    chassis.addComponent(mainBody, -(L_frontal / 2 + 1) * segment, L_lateral / 2 - 3 * segment,0);
+	    this.mainBody = new Component();
+	    this.mainBody.addCuboid(0, 0, 0, L_lateral, 2 * segment, (L_frontal - 2) * segment, chassisColor);
+	    this.chassis.addComponent(this.mainBody, -(L_frontal / 2 + 1) * segment, L_lateral / 2 - 3 * segment, 0);
 
 	    // front bumper
 	    let shape = new THREE.Shape();
@@ -23,10 +23,10 @@ class Car extends Component{
 	    shape.lineTo(segment, segment);
 	    shape.lineTo(segment, -segment);
 
-	    let frontBumper = new Component();
-		frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
+	    this.frontBumper = new Component();
+		this.frontBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
 		// TODO: #3 Fix x position to take segment in consideration
-	    chassis.addComponent(frontBumper, -L_frontal / 2 - 4 * segment, -4 * segment, 0);
+	    this.chassis.addComponent(this.frontBumper, -L_frontal, -4 * segment, 0);
 
 	    // back bumper
 	    shape = new THREE.Shape();
@@ -34,29 +34,30 @@ class Car extends Component{
 	    shape.lineTo(1.25 * segment, 1.5 * segment);
 	    shape.lineTo(segment, -1.5 * segment);
 
-	    let backBumper = new Component();
-	    backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
+	    this.backBumper = new Component();
+	    this.backBumper.addHorizontalExtrusion(0, 0, 0, shape, (L_frontal + 2) * segment, chassisColor);
 		// TODO: #4 Fix x position to take segment in consideration
-		chassis.addComponent(backBumper, -L_frontal / 2 - 4 * segment, L_lateral - 1.5 * segment, 0);
+		this.chassis.addComponent(this.backBumper, -L_frontal, L_lateral - 1.5 * segment, 0);
 
 	    // Wheels
-	    let wheelFL = new Component();
-	    wheelFL.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
-	    chassis.addComponent(wheelFL, 0, 0, 0);
+	    this.wheelFL = new Component();
+	    this.wheelFL.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+	    this.chassis.addComponent(this.wheelFL, 0, 0, 0);
 
-	    let wheelFR = new Component();
-	    wheelFR.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
-	    chassis.addComponent(wheelFR, -L_frontal * segment, 0, 0);
+	    this.wheelFR = new Component();
+	    this.wheelFR.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+	    this.chassis.addComponent(this.wheelFR, -L_frontal * segment, 0, 0);
 
-	    let wheelBR = new Component();
-	    wheelBR.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
-	    chassis.addComponent(wheelBR, -L_frontal * segment, L_lateral - 6 * segment, 0);
+	    this.wheelBR = new Component();
+	    this.wheelBR.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+	    this.chassis.addComponent(this.wheelBR, -L_frontal * segment, L_lateral - 6 * segment, 0);
 
-	    let wheelBL = new Component();
-	    wheelBL.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
-	    chassis.addComponent(wheelBL, 0, L_lateral - 6 * segment, 0);
-
-		this.addComponent(chassis, 9 , -15,  4.2);
+	    this.wheelBL = new Component();
+	    this.wheelBL.addCylinderHorizontal(0, 0, 0, 2 * radius, 2 * radius, 2 * segment, wheelsColor);
+		this.chassis.addComponent(this.wheelBL, 0, L_lateral - 6 * segment, 0);
+		
+		this.set_chassis();
+		this.addComponent(this.chassis, 9 , -15,  4.2);
 
 
 		//parte lateral
@@ -379,7 +380,7 @@ class Car extends Component{
 		this.phongMesh.push(phongMat);  
 		this.lambertMesh.push(lambertMat);
 		this.basicMesh.push(basicMat);
-		this.add(phongMat);
+		this.add(basicMat);
 		
 
 	}
@@ -499,20 +500,49 @@ class Car extends Component{
 		this.phongMesh.push(phongMat);  
 		this.lambertMesh.push(lambertMat);
 		this.basicMesh.push(basicMat);
-		this.add(phongMat);
+		this.add(basicMat);
 
 
 
 	}
 
-/* 	changeMesh(flag){
+	set_chassis(){
+		this.frontBumper.currentMesh = this.frontBumper.basicMesh;
+		this.frontBumper.lastMesh = this.frontBumper.lambertMesh;
+
+		this.wheelBL.currentMesh = this.wheelBL.basicMesh;
+		this.wheelBL.lastMesh = this.wheelBL.lambertMesh;
+
+		this.wheelBR.currentMesh = this.wheelBR.basicMesh;
+		this.wheelBR.lastMesh = this.wheelBR.lambertMesh;
+
+		this.wheelFL.currentMesh = this.wheelFL.basicMesh;
+		this.wheelFL.lastMesh = this.wheelFL.lambertMesh;
+
+		this.wheelFR.currentMesh = this.wheelFR.basicMesh;
+		this.wheelFR.lastMesh = this.wheelFR.lambertMesh;
+
+		this.backBumper.currentMesh = this.backBumper.basicMesh;
+		this.backBumper.lastMesh = this.backBumper.lambertMesh;
+
+		this.mainBody.currentMesh = this.mainBody.basicMesh;
+		this.mainBody.lastMesh = this.mainBody.lambertMesh;
+	}
+
+	changeMesh(flag){
 		super.changeMesh(flag);
 		this.frontBumper.changeMesh(flag);
+
 		this.wheelBL.changeMesh(flag);
+
 		this.wheelBR.changeMesh(flag);
+
 		this.wheelFL.changeMesh(flag);
+
 		this.wheelFR.changeMesh(flag);
+
 		this.backBumper.changeMesh(flag);
+
 		this.mainBody.changeMesh(flag);
 	}
- */}
+ }
