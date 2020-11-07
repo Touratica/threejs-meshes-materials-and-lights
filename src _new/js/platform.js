@@ -1,7 +1,7 @@
 class Platform extends Component {
 	constructor(x, y, z) {
 
-		const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126)"
+		const platformColor =  new THREE.Color("rgb(137, 116, 126)"); //"rgb(137, 116, 126) rgb(137, 116, 126)"
 
 		super(x, y, z);
 		

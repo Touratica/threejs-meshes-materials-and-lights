@@ -4,11 +4,11 @@ class Car extends Component{
 		this.phongMesh = [];
 		this.basicMesh = [];
 		this.lambertMesh = [];
-		let L_lateral = radius * 14; // chassis body width
+		let L_lateral = radius * 11; // chassis body width
 		let segment = L_lateral / 28;
         let L_frontal = 14; // length between center of front wheels
-       	let chassisColor = new THREE.Color("rgb(102, 102, 102)");
-		let wheelsColor = new THREE.Color("black");
+		let chassisColor = new THREE.Color("rgb(3, 4, 6)");
+		let wheelsColor = new THREE.Color("rgb(10, 11, 15)");
         
 		let geometry = new THREE.Geometry();
 
@@ -194,7 +194,7 @@ class Car extends Component{
 
 	createBody(geometry,radius,x,y,z){
 		let L_lateral = radius * 14; // chassis body width
-		let bodyworkColor = new THREE.Color("rgb(102, 102, 102)");
+		let bodyworkColor = new THREE.Color("rgb(80, 85, 90)");
 		//right surface
 		
 
@@ -368,7 +368,7 @@ class Car extends Component{
 			//wireframe: true,
 			color: bodyworkColor,
 			specular: 0x424849,
-			//side: THREE.DoubleSide
+			side: THREE.DoubleSide
 		}));
 		let lambertMat = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({
 			color: bodyworkColor ,
@@ -395,10 +395,10 @@ class Car extends Component{
 
 	}
 	createWindow(x,y,z,radius){	
-		let windowColor = new THREE.Color("rgb(1, 9, 44)");
+		let windowColor = new THREE.Color("rgb(11, 10, 15)");
 		//let windowColor = new THREE.Color("yellow");
 		let geometry = new THREE.Geometry();
-		let L_lateral = radius * 14; // chassis body width
+		let L_lateral = radius * 11; // chassis body width
 		let segment = L_lateral / 28;
 		let L_frontal = 14; // length between center of front wheels
 
