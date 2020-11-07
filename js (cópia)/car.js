@@ -319,7 +319,7 @@ class Car extends Component{
 		
 		geometry.faces.push(new THREE.Face3(21, 23, 22, bodyworkColor)); // 10', 12', 11'
 		geometry.faces.push(new THREE.Face3(72, 61,54, bodyworkColor));//21' 36 40'
-		*/
+
 		// front surface
         geometry.faces.push(new THREE.Face3(47, 45, 57, bodyworkColor)); // 29, 27, 27'
         geometry.faces.push(new THREE.Face3(47, 57, 58, bodyworkColor)); // 29,27, 29'
@@ -334,10 +334,10 @@ class Car extends Component{
         
         geometry.faces.push(new THREE.Face3(50, 74, 51, bodyworkColor)); // 31, 31', 38
         geometry.faces.push(new THREE.Face3(62,74, 51, bodyworkColor)); // 37, 31', 38
-		//geometry.faces.push(new THREE.Face3(62, 52, 51, bodyworkColor)); // 37, 39, 38 JANELA
+		//geometry.faces.push(new THREE.Face3(62, 52, 51, bodyworkColor)); // 37, 39, 38
 		
 
-		//geometry.faces.push(new THREE.Face3(62, 61, 52 , bodyworkColor)); // 37, 36, 39 JANELA
+		//geometry.faces.push(new THREE.Face3(62, 61, 52 , bodyworkColor)); // 37, 36, 39
 		
         geometry.faces.push(new THREE.Face3(74, 55, 62, bodyworkColor)); // 31', 25', 37
         geometry.faces.push(new THREE.Face3(62, 55, 61, bodyworkColor)); // 37 , 25', 36
@@ -356,19 +356,19 @@ class Car extends Component{
         geometry.faces.push(new THREE.Face3(65, 64, 60, bodyworkColor)); // 41 , 35 , 33
         
         geometry.faces.push(new THREE.Face3(60, 59, 64 , bodyworkColor)); // 33 , 32 , 35
-		geometry.faces.push(new THREE.Face3(59, 64, 63, bodyworkColor)); // 32 , 35 , 34
+        geometry.faces.push(new THREE.Face3(59, 64, 63, bodyworkColor)); // 32 , 35 , 34
 		geometry.faces.push(new THREE.Face3(52, 61, 67, bodyworkColor)); // 39 , 36 , 43
 
 		//geometry.faces.push(new THREE.Face3(59, 60, 64, bodyworkColor)); // 32,33,35
 		//geometry.faces.push(new THREE.Face3(59, 63, 63, bodyworkColor)); // 32 , 34 , 35
 
-		/*
+	
 		// back surface
 		geometry.faces.push(new THREE.Face3(50, 74, 23, bodyworkColor)); // 31, 31', 12'
 		geometry.faces.push(new THREE.Face3(18, 50, 23, bodyworkColor)); // 12, 31, 12'
 		geometry.faces.push(new THREE.Face3(18, 23, 22, bodyworkColor)); // 12, 12', 11'
 		geometry.faces.push(new THREE.Face3(17, 18, 22, bodyworkColor)); // 11, 12, 11'
-		*/
+	
 		geometry.computeFaceNormals();
 		geometry.computeVertexNormals();
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
