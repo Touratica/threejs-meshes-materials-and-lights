@@ -187,7 +187,26 @@ class Car extends Component{
 		/*======================================================================
 		Surfaces
 		======================================================================*/
-/*
+
+		
+		
+       
+	}
+
+	createBody(geometry,radius,x,y,z){
+		let L_lateral = radius * 14; // chassis body width
+		let bodyworkColor = new THREE.Color("silver");
+		//right surface
+		geometry.faces.push(new THREE.Face3(45, 47, 48,bodyworkColor));  //27,29,30
+		geometry.faces.push(new THREE.Face3(43, 45, 48,bodyworkColor));//26,27,30
+        geometry.faces.push(new THREE.Face3(46, 45, 43,bodyworkColor));//27,28,26
+        geometry.faces.push(new THREE.Face3(43, 46, 42,bodyworkColor));//26,28,25
+
+        geometry.faces.push(new THREE.Face3(0, 43, 48,bodyworkColor));//1,26,30
+        geometry.faces.push(new THREE.Face3(0, 42, 43,bodyworkColor));//1,25,26
+        geometry.faces.push(new THREE.Face3(0, 2, 53,bodyworkColor));//1,2,40
+		geometry.faces.push(new THREE.Face3(0, 42, 53,bodyworkColor));//1,25,40
+		/*
 		1,2,3,4,5,6,7,8,
 		0,2,4,5,6,7,8,14,
 
@@ -198,34 +217,15 @@ class Car extends Component{
 		24,25,26,27,32,33,34,35,36,37,38,39,42,43,45,46,47,48,50,51,52,53
 		32,36,43
 */
-		
-		
+
+        geometry.faces.push(new THREE.Face3(42, 52, 53,bodyworkColor));//25,39,40
+    	geometry.faces.push(new THREE.Face3(36, 52, 53,bodyworkColor));//21,39,40
+        geometry.faces.push(new THREE.Face3(2, 39, 53,bodyworkColor));//2,24,40
+        geometry.faces.push(new THREE.Face3(53, 39, 37,bodyworkColor));//24,40,22
        
-	}
-
-	createBody(geometry,radius,x,y,z){
-		let L_lateral = radius * 14; // chassis body width
-		let bodyworkColor = new THREE.Color("silver");
-		/*
-		//right surface
-		geometry.faces.push(new THREE.Face3(45, 47, 48,bodyworkColor));  //0
-		geometry.faces.push(new THREE.Face3(43, 45, 48,bodyworkColor));//1
-        geometry.faces.push(new THREE.Face3(43, 45, 46,bodyworkColor));//2
-        geometry.faces.push(new THREE.Face3(42, 43, 46,bodyworkColor));//3
-
-        geometry.faces.push(new THREE.Face3(0, 43, 48,bodyworkColor));//4
-        geometry.faces.push(new THREE.Face3(0, 42, 43,bodyworkColor));//5
-        geometry.faces.push(new THREE.Face3(0, 2, 53,bodyworkColor));//6
-        geometry.faces.push(new THREE.Face3(0, 42, 53,bodyworkColor));//7
-
-        geometry.faces.push(new THREE.Face3(42, 52, 53,bodyworkColor));
-    	geometry.faces.push(new THREE.Face3(36, 52, 53,bodyworkColor));
-        geometry.faces.push(new THREE.Face3(2, 39, 53,bodyworkColor));
-        geometry.faces.push(new THREE.Face3(37, 39, 53,bodyworkColor));
-       
-    	geometry.faces.push(new THREE.Face3(36, 37, 53,bodyworkColor));
-        geometry.faces.push(new THREE.Face3(2, 4, 39,bodyworkColor));
-		geometry.faces.push(new THREE.Face3(4, 38, 39,bodyworkColor));
+    	geometry.faces.push(new THREE.Face3( 53, 37, 36,bodyworkColor));//22,40 ,21,
+        geometry.faces.push(new THREE.Face3(2, 4, 39,bodyworkColor));//2,3,24
+		geometry.faces.push(new THREE.Face3(4, 38, 39,bodyworkColor));//3,23,24
 		geometry.faces.push(new THREE.Face3(5, 26, 38,bodyworkColor));
 		geometry.faces.push(new THREE.Face3(4, 5, 38,bodyworkColor));
 
@@ -382,7 +382,7 @@ class Car extends Component{
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ 
 			color: bodyworkColor,
 			side: THREE.DoubleSide,
-			 wireframe:true
+			wireframe:true
 		}));
 		
 		phongMat.position.set(x, y, z);
