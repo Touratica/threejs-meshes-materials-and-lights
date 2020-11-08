@@ -1,3 +1,4 @@
+
 class Component extends THREE.Object3D {
 	constructor(x, y, z) {
 		super();
@@ -5,20 +6,13 @@ class Component extends THREE.Object3D {
         this.phongMesh = [];
 		this.lambertMesh = [];
         this.basicMesh = [];
-        this.currentMesh = this.basicMesh;
-        
-		//this.create(this, x, y, z);//careful here! xD
-		//nao apagues, poe so em comentario xD
+    
 	}
 	addCuboid(x, y, z, w, h, d, colour) {
 		let geometry = new THREE.BoxGeometry(d, w, h);
 
 		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({ color: colour }));
 
-		/* ew THREE.MeshPhongMaterial
-			  (
-				  {color: "rgb(55, 52, 67)" }
-		));*/
 
 		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: colour}));
 
@@ -33,13 +27,11 @@ class Component extends THREE.Object3D {
 
 		this.phongMesh.push(phongMat);
 		this.lambertMesh.push(lambertMat);
-        this.basicMesh.push(basicMat);
-        
-        this.add(phongMat);
+		this.basicMesh.push(basicMat);
+		
+        this.add(basicMat);
 
 	}
-
-	
 
 	addCylinderHorizontal(x, y, z, baseD, baseU, height, colour) {
 		let geometry = new THREE.CylinderGeometry(baseD / 2, baseU / 2 , height, 16, 1);
@@ -59,12 +51,11 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
     
-  }
-  
+    }
 
-	addCylinderVertical(x, y, z, base, height, colour) { //problema com a cor
+	addCylinderVertical(x, y, z, base, height, colour) { 
 		let geometry = new THREE.CylinderGeometry(base / 2, base / 2, height, 16, 1);
 
 		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
@@ -88,7 +79,7 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
 
 	}
 
@@ -106,14 +97,14 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
 	}
 
 	addHorizontalExtrusion(x, y, z, shape, height, color) {
 		let geometry = new THREE.ExtrudeGeometry(shape, {steps: 1, depth: height, bevelEnabled: false});
 		geometry.rotateY(-Math.PI / 2);
-		let basicMat = new THREE.Mesh(geometry,new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
-		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide}));
+		let basicMat = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: color, side: THREE.DoubleSide}));
+		let phongMat = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({color: color, side: THREE.DoubleSide, specular: 0x424849}));
 		let lambertMat = new THREE.Mesh(geometry,
 			new THREE.MeshLambertMaterial({color: color, side: THREE.DoubleSide}));
 
@@ -125,7 +116,19 @@ class Component extends THREE.Object3D {
 		this.lambertMesh.push(lambertMat);
         this.basicMesh.push(basicMat);
         
-        this.add(phongMat);
+        this.add(basicMat);
+	}
+
+	addCone( x, y, z) {
+		let geometry = new THREE.ConeGeometry(5, 8, 64, 1, true, 0);
+		
+		let material = new THREE.MeshBasicMaterial({
+		  color: "rgb(241, 202, 1)"
+		});
+		let cone = new THREE.Mesh(geometry, material);
+		cone.rotateX(Math.PI/2);
+		cone.position.set(x, y, z);
+		this.add(cone);
 	}
 
 	addComponent(comp, x, y, z) {
@@ -136,39 +139,48 @@ class Component extends THREE.Object3D {
 	position_set(x, y, z){
 		this.position.set(x,y,z);
     }
-    
 
-
-	changeMesh(flag) { //muda o tipo de mesh, consoante a flag passada
-        //obj pode ser do tipo carro ou palanquete
-        this.removeMesh();
-        if (flag === "Phong"){
-            this.addMesh(this.phongMesh);
+	changeMesh(flag) {
+		if (flag === "changeShadow") {
+	        if (this.currentMesh === this.lambertMesh) {
+				this.removeMesh();
+	            this.addMesh(this.phongMesh);
+	        }
+	        else if (this.currentMesh === this.phongMesh) {
+	        	this.removeMesh();
+	        	this.addMesh(this.lambertMesh);
+	        }
+	        else {
+	        	this.removeMesh();
+	        	this.addMesh(this.lastMesh);
+	        }
         }
-
-        else if (flag === "Lambert"){
-            this.addMesh(this.lambertMesh);
-        }
-
-        else if (flag === "Basic" ){
-            this.addMesh(this.basicMesh);
-        }
-
+		else {
+			if (this.currentMesh !== this.basicMesh) {
+				this.removeMesh();
+				this.lastMesh = this.currentMesh;
+				this.addMesh(this.basicMesh);
+			}
+			else {
+				this.removeMesh();
+				this.addMesh(this.lastMesh);
+			}
+		}
 	}
 
-	addMesh(meshVector) { //meshVector tem todos os objetos da cena com esse tipo de mesh
-        //assim, muda automaticamente a mesh para todos
+	//mesh vector has all objects of the scene. 
+	//addMesh changes all the meshes.
+	addMesh(meshVector) { 
         this.currentMesh = meshVector;
 		for (let i = 0; i < meshVector.length; i++) {
 			this.add(meshVector[i]);
 		}
 	}
 
-	//tira a mesh presente de todos os os objetos presentes em meshVector
+	//removes the mesh of all objects.
 	removeMesh() {
 		for (let i = 0; i < this.currentMesh.length; i++) {
 			this.remove(this.currentMesh[i]);
 		}
 	}
-
 }
