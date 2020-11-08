@@ -1,4 +1,4 @@
-let camera, PerspectiveCamera /*4*/, OrtogonalCamera /*5*/;
+let camera, PerspectiveCamera, OrtogonalCamera;
 
 let scene, renderer;
 let clock = new THREE.Clock();
@@ -9,20 +9,18 @@ let on_off_Directional = 0;
 let spotlights = [];
 
 let car;
-let radium = 2; //raio da roda
-let platform; // objeto palanque inclui o carro consigo. 
+let radius = 2;	// wheel radius
+let platform;
 let floor;
-
 
 let time = clock.getDelta();
 
 // Sets the z-axis as the top pointing one
 THREE.Object3D.DefaultUp.set(0, 0, 1);
 
-
 function createOrtogonalCamera(x, y, z) {
 	// Adjusts camera ratio so the scene is totally visible 
-	/*OrthographicCamera( left, right, top, bottom, near, far )*/
+	// OrthographicCamera( left, right, top, bottom, near, far )
 	camera = new THREE.OrthographicCamera(window.innerWidth / -(2 * cameraRatio),
 		window.innerWidth / (2 * cameraRatio), window.innerHeight / (2 * cameraRatio),
 		window.innerHeight / -(2 * cameraRatio), 0, 1000);
@@ -51,42 +49,41 @@ function createScene() {
 	scene.background = new THREE.Color("black");
 	
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
-	//scene.add(new THREE.AxesHelper(30));
+	// scene.add(new THREE.AxesHelper(30));
+	
 	floor = new Floor(0, 0, 0);
 	
-	
-	car = new Car(7.5,-12,5,5); 
-	platform = new Platform(0,0,0);
+	car = new Car(7.5, -12, 5, 5); 
+	platform = new Platform(0, 0, 0);
 	platform.addCar(car);
 	
 	scene.add(platform);
 	scene.add(floor);
 
 	spotlights[0] = new SpotLight(0, -80, 40);
-	const spotLightHelper = new THREE.SpotLightHelper(spotlights[0].light );
-	//scene.add( spotLightHelper );	
-	spotlights[0].rotateX(Math.PI/4);
+	const spotLightHelper = new THREE.SpotLightHelper(spotlights[0].light);
+	// scene.add(spotLightHelper);	
+	spotlights[0].rotateX(Math.PI / 4);
 	
    	spotlights[1] = new SpotLight(-80, 0, 40);
-	spotlights[1].rotateY(-Math.PI/4);
+	spotlights[1].rotateY(-Math.PI / 4);
 
     spotlights[2] = new SpotLight(80, 0, 40);
-	spotlights[2].rotateY(Math.PI/4);
+	spotlights[2].rotateY(Math.PI / 4);
 	
 	directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
   	directionalLight.position.set(-95, 0, 25);
 	scene.add(directionalLight);
-
 }
 
 function animate() {
-	//  animation functions
+	// Animation functions
 
 	let angSpeed = 1;
 
 	let timeDelta = clock.getDelta();
 
-	//rotates the platform
+	// Rotates the platform
 	if (platform.get_rotation() === "Left") {
 		platform.rotate_z(angSpeed * timeDelta);
 	}
@@ -95,25 +92,24 @@ function animate() {
 		platform.rotate_z(-angSpeed * timeDelta);
 	}
 
-	if(spotlights[0].turnLight) {
+	if (spotlights[0].turnLight) {
 		spotlights[0].OnOff();
 	}
 	
-	if(spotlights[1].turnLight){
+	if (spotlights[1].turnLight) {
 		spotlights[1].OnOff();
 	}
 
-	if(spotlights[2].turnLight){
+	if (spotlights[2].turnLight) {
 		spotlights[2].OnOff();
 	}
 
-	//turns on/off the directional light
+	// Turns on/off the directional light
 	if (on_off_Directional == 1) {
         on_off_Directional = 0;
         
-			directionalLight.visible = !directionalLight.visible;
+		directionalLight.visible = !directionalLight.visible;
     }
-
 
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
@@ -124,7 +120,6 @@ function onResize() {
 
 	if (window.innerHeight > 0 && window.innerWidth > 0) {
 		if (camera === OrtogonalCamera) {
-		// Adjusts camera ratio so the scene would be totally visible
 			camera.left = window.innerWidth / -(2 * cameraRatio);
 			camera.right = window.innerWidth / (2 * cameraRatio);
 			camera.top = window.innerHeight / (2 * cameraRatio);
@@ -157,39 +152,35 @@ function onKeyDown(e) {
 		case "5":
 			camera = OrtogonalCamera;
 			break;
-		case "Q": //switches the light On/Off
+
+		case "Q":	//switches the light On/Off
 		case "q":
-			
 			on_off_Directional = 1;
 			break;
-		case "W": // changes between Basic and one of the others
+		case "W":	// changes between Basic and one of the others
 		case "w":
-			// TODO: Has to change every object
 			floor.changeMesh();
 			platform.changeMesh();
 			break;
-		case "E": // changes between Phong and Gouraud
+		case "E":	// changes between Phong and Gouraud
 		case "e":
-			// TODO: Has to change every object
 			floor.changeMesh("changeShadow");
 			platform.changeMesh("changeShadow");
 			break;
 
-		case "ArrowRight": //rotates the platform
+		case "ArrowRight":	// rotates the platform
 			platform.set_rotation("Right");
 			break;
-
 		case "ArrowLeft":
 			platform.set_rotation("Left");
 			break;
-
 	}
 }
 
 function onKeyUp(e) {
 	switch (e.key) {
-		case "ArrowRight":
-		case "ArrowLeft": //stops the platform
+		case "ArrowRight":	//stops the platform
+		case "ArrowLeft":
 			platform.set_rotation("Stop");
 			break;
 	}
@@ -203,7 +194,7 @@ function __init__() {
 	document.body.appendChild(renderer.domElement);
 
 	createScene();
-	OrtogonalCamera = createOrtogonalCamera(0, 100, 20);        //view to the platform	
+	OrtogonalCamera = createOrtogonalCamera(0, 100, 20);//view to the platform	
 	PerspectiveCamera = createPerspectiveCamera(-40, -90, 40); 
 	
 	window.addEventListener("resize", onResize)
