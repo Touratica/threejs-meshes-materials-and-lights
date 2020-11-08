@@ -57,7 +57,7 @@ class Car extends Component{
 		this.chassis.addComponent(this.wheelBL, 0, L_lateral - 6 * segment, 0);
 		
 		this.set_chassis();
-		this.addComponent(this.chassis, 9 , -15,  4.2+0.8);
+		this.addComponent(this.chassis, x , y, z);
 
 
 		//parte lateral

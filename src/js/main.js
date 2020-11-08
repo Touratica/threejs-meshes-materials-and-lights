@@ -2,7 +2,7 @@ let camera, PerspectiveCamera /*4*/, OrtogonalCamera /*5*/;
 
 let scene, renderer;
 let clock = new THREE.Clock();
-let cameraRatio = 20;
+let cameraRatio = 10;
 
 let directionalLight;
 let on_off_Directional = 0;
@@ -22,12 +22,6 @@ THREE.Object3D.DefaultUp.set(0, 0, 1);
 
 function createOrtogonalCamera(x, y, z) {
 	// Adjusts camera ratio so the scene is totally visible 
-	if (window.innerWidth / window.innerHeight > 1.2725) {
-		cameraRatio = window.innerHeight / 150;
-	}
-	else {
-		cameraRatio = window.innerWidth / 190;
-	}
 	/*OrthographicCamera( left, right, top, bottom, near, far )*/
 	camera = new THREE.OrthographicCamera(window.innerWidth / -(2 * cameraRatio),
 		window.innerWidth / (2 * cameraRatio), window.innerHeight / (2 * cameraRatio),
@@ -36,7 +30,7 @@ function createOrtogonalCamera(x, y, z) {
 	camera.position.x = x;
 	camera.position.y = y;
 	camera.position.z = z;
-	camera.lookAt(platform.position);
+	camera.lookAt(new THREE.Vector3(-x, -y, z));
 	return camera;
 }
 
@@ -58,10 +52,10 @@ function createScene() {
 	
 	// Adds axes to the scene: x-axis is red, y-axis is green, z-axis is blue
 	//scene.add(new THREE.AxesHelper(30));
-	floor = new Floor(0,0,0);
+	floor = new Floor(0, 0, 0);
 	
 	
-	car = new Car(9,-15,4.5,5); 
+	car = new Car(7.5,-12,5,5); 
 	platform = new Platform(0,0,0);
 	platform.addCar(car);
 	
@@ -131,12 +125,6 @@ function onResize() {
 	if (window.innerHeight > 0 && window.innerWidth > 0) {
 		if (camera === OrtogonalCamera) {
 		// Adjusts camera ratio so the scene would be totally visible
-			if (window.innerWidth / window.innerHeight > 1.2725) {
-				cameraRatio = window.innerHeight / 150;
-			}
-			else {
-				cameraRatio = window.innerWidth / 190;
-			}
 			camera.left = window.innerWidth / -(2 * cameraRatio);
 			camera.right = window.innerWidth / (2 * cameraRatio);
 			camera.top = window.innerHeight / (2 * cameraRatio);
@@ -215,7 +203,7 @@ function __init__() {
 	document.body.appendChild(renderer.domElement);
 
 	createScene();
-	OrtogonalCamera = createOrtogonalCamera(0, 100, 0);        //view to the platform	
+	OrtogonalCamera = createOrtogonalCamera(0, 100, 20);        //view to the platform	
 	PerspectiveCamera = createPerspectiveCamera(-40, -90, 40); 
 	
 	window.addEventListener("resize", onResize)
